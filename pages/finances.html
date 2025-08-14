@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finances - Property Management Dashboard</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Container -->
+        <div class="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mobile Sidebar Toggle -->
+            <button class="mobile-sidebar-toggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-center">
+                    <h1 class="page-title">Financial Management</h1>
+                </div>
+                <div class="header-right">
+                    <!-- Language Selector -->
+                    <select id="languageSelector" class="language-selector">
+                        <option value="en">English</option>
+                        <option value="hy">Հայերեն</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                    <!-- Action Buttons -->
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" id="add-expense-btn">
+                            <i class="fas fa-minus-circle"></i>
+                            <span class="btn-text">Add Expense</span>
+                        </button>
+                        <button class="btn btn-primary" id="add-income-btn">
+                            <i class="fas fa-plus-circle"></i>
+                            <span class="btn-text">Add Income</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content-wrapper">
+                <!-- Financial Overview Cards -->
+                <div class="financial-overview">
+                    <div class="overview-card total-income">
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Income</h3>
+                            <div class="amount">$<span id="total-income">2,847,500</span></div>
+                            <div class="period">This Year</div>
+                        </div>
+                        <div class="trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12.5%</span>
+                        </div>
+                    </div>
+
+                    <div class="overview-card total-expenses">
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Expenses</h3>
+                            <div class="amount">$<span id="total-expenses">1,234,800</span></div>
+                            <div class="period">This Year</div>
+                        </div>
+                        <div class="trend negative">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+8.2%</span>
+                        </div>
+                    </div>
+
+                    <div class="overview-card net-profit">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Net Profit</h3>
+                            <div class="amount">$<span id="net-profit">1,612,700</span></div>
+                            <div class="period">This Year</div>
+                        </div>
+                        <div class="trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+15.3%</span>
+                        </div>
+                    </div>
+
+                    <div class="overview-card cash-flow">
+                        <div class="card-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Cash Flow</h3>
+                            <div class="amount">$<span id="cash-flow">456,200</span></div>
+                            <div class="period">Available</div>
+                        </div>
+                        <div class="trend neutral">
+                            <i class="fas fa-minus"></i>
+                            <span>Stable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Income & Expenses Tabs -->
+                <div class="financial-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="income">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>Income</span>
+                        </button>
+                        <button class="tab-btn" data-tab="expenses">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>Expenses</span>
+                        </button>
+                        <button class="tab-btn" data-tab="transactions">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </button>
+                    </div>
+
+                    <!-- Income Tab -->
+                    <div class="tab-content active" id="income-tab">
+                        <div class="tab-header">
+                            <h2>Income Sources</h2>
+                            <div class="income-filters">
+                                <select id="income-category-filter" class="filter-select">
+                                    <option value="">All Categories</option>
+                                    <option value="property-sales">Property Sales</option>
+                                    <option value="property-rentals">Property Rentals</option>
+                                    <option value="commissions">Broker Commissions</option>
+                                    <option value="other">Other Income</option>
+                                </select>
+                                <input type="month" id="income-month-filter" class="filter-input">
+                            </div>
+                        </div>
+
+                        <div class="income-breakdown">
+                            <div class="income-chart">
+                                <canvas id="incomeChart" width="400" height="200"></canvas>
+                            </div>
+                            <div class="income-summary">
+                                <div class="summary-item">
+                                    <h4>Property Sales</h4>
+                                    <div class="summary-amount">$1,847,500</div>
+                                    <div class="summary-percentage">64.9%</div>
+                                </div>
+                                <div class="summary-item">
+                                    <h4>Property Rentals</h4>
+                                    <div class="summary-amount">$756,000</div>
+                                    <div class="summary-percentage">26.6%</div>
+                                </div>
+                                <div class="summary-item">
+                                    <h4>Broker Commissions</h4>
+                                    <div class="summary-amount">$189,000</div>
+                                    <div class="summary-percentage">6.6%</div>
+                                </div>
+                                <div class="summary-item">
+                                    <h4>Other Income</h4>
+                                    <div class="summary-amount">$55,000</div>
+                                    <div class="summary-percentage">1.9%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="income-table">
+                            <div class="table-header">
+                                <h3>Recent Income</h3>
+                                <button class="btn btn-sm btn-primary" onclick="exportIncomeData()">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                            <div class="table-container">
+                                <table class="financial-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Category</th>
+                                            <th>Description</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="income-tbody">
+                                        <!-- Income rows populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expenses Tab -->
+                    <div class="tab-content" id="expenses-tab">
+                        <div class="tab-header">
+                            <h2>Expense Categories</h2>
+                            <div class="expense-filters">
+                                <select id="expense-category-filter" class="filter-select">
+                                    <option value="">All Categories</option>
+                                    <option value="rental-services">Rental Services</option>
+                                    <option value="broker-expenses">Broker Expenses</option>
+                                    <option value="office-expenses">Office Expenses</option>
+                                    <option value="other">Other Expenses</option>
+                                </select>
+                                <input type="month" id="expense-month-filter" class="filter-input">
+                            </div>
+                        </div>
+
+                        <div class="expense-breakdown">
+                            <div class="expense-chart">
+                                <canvas id="expenseChart" width="400" height="200"></canvas>
+                            </div>
+                            <div class="expense-summary">
+                                <div class="summary-item">
+                                    <h4>Rental Services</h4>
+                                    <div class="summary-amount">$456,800</div>
+                                    <div class="summary-percentage">37.0%</div>
+                                </div>
+                                <div class="summary-item">
+                                    <h4>Broker Expenses</h4>
+                                    <div class="summary-amount">$389,200</div>
+                                    <div class="summary-percentage">31.5%</div>
+                                </div>
+                                <div class="summary-item">
+                                    <h4>Office Expenses</h4>
+                                    <div class="summary-amount">$298,800</div>
+                                    <div class="summary-percentage">24.2%</div>
+                                </div>
+                                <div class="summary-item">
+                                    <h4>Other Expenses</h4>
+                                    <div class="summary-amount">$90,000</div>
+                                    <div class="summary-percentage">7.3%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expense-table">
+                            <div class="table-header">
+                                <h3>Recent Expenses</h3>
+                                <button class="btn btn-sm btn-primary" onclick="exportExpenseData()">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                            <div class="table-container">
+                                <table class="financial-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Category</th>
+                                            <th>Description</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expense-tbody">
+                                        <!-- Expense rows populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transactions Tab -->
+                    <div class="tab-content" id="transactions-tab">
+                        <div class="tab-header">
+                            <h2>All Transactions</h2>
+                            <div class="transaction-filters">
+                                <select id="transaction-type-filter" class="filter-select">
+                                    <option value="">All Types</option>
+                                    <option value="income">Income</option>
+                                    <option value="expense">Expense</option>
+                                    <option value="transfer">Transfer</option>
+                                </select>
+                                <input type="month" id="transaction-month-filter" class="filter-input">
+                                <input type="text" id="transaction-search" class="filter-input" placeholder="Search...">
+                            </div>
+                        </div>
+
+                        <div class="transaction-table">
+                            <div class="table-container">
+                                <table class="financial-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Type</th>
+                                            <th>Category</th>
+                                            <th>Description</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="transaction-tbody">
+                                        <!-- Transaction rows populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Income Modal -->
+    <div id="addIncomeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Income</h2>
+                <button class="modal-close" id="closeIncomeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addIncomeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="income-category">Income Category</label>
+                            <select id="income-category" name="category" required>
+                                <option value="">Select category</option>
+                                <option value="property-sales">Property Sales</option>
+                                <option value="property-rentals">Property Rentals</option>
+                                <option value="commissions">Broker Commissions</option>
+                                <option value="other">Other Income</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="income-amount">Amount ($)</label>
+                            <input type="number" id="income-amount" name="amount" 
+                                   placeholder="0.00" step="0.01" min="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="income-date">Income Date</label>
+                            <input type="date" id="income-date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="income-status">Status</label>
+                            <select id="income-status" name="status" required>
+                                <option value="received">Received</option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="income-description">Description</label>
+                        <textarea id="income-description" name="description" rows="3" 
+                                  placeholder="Income description..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="income-notes">Additional Notes</label>
+                        <textarea id="income-notes" name="notes" rows="2" 
+                                  placeholder="Optional notes..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelIncomeBtn">Cancel</button>
+                <button type="submit" form="addIncomeForm" class="btn btn-primary">Add Income</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Expense Modal -->
+    <div id="addExpenseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Expense</h2>
+                <button class="modal-close" id="closeExpenseModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addExpenseForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expense-category">Expense Category</label>
+                            <select id="expense-category" name="category" required>
+                                <option value="">Select category</option>
+                                <option value="rental-services">Rental Services</option>
+                                <option value="broker-expenses">Broker Expenses</option>
+                                <option value="office-expenses">Office Expenses</option>
+                                <option value="other">Other Expenses</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="expense-amount">Amount ($)</label>
+                            <input type="number" id="expense-amount" name="amount" 
+                                   placeholder="0.00" step="0.01" min="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expense-date">Expense Date</label>
+                            <input type="date" id="expense-date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expense-status">Status</label>
+                            <select id="expense-status" name="status" required>
+                                <option value="paid">Paid</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-description">Description</label>
+                        <textarea id="expense-description" name="description" rows="3" 
+                                  placeholder="Expense description..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-notes">Additional Notes</label>
+                        <textarea id="expense-notes" name="notes" rows="2" 
+                                  placeholder="Optional notes..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelExpenseBtn">Cancel</button>
+                <button type="submit" form="addExpenseForm" class="btn btn-primary">Add Expense</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/component-loader.js"></script>
+    <script src="../js/language-manager.js"></script>
+    <script src="../js/translation-utils.js"></script>
+    <script>
+        // Sample financial data
+        const sampleIncome = [
+            {
+                id: 1,
+                date: '2024-01-15',
+                category: 'Property Sales',
+                description: 'Luxury penthouse sale commission',
+                amount: 45000.00,
+                status: 'Received',
+                notes: 'High-end property sale'
+            },
+            {
+                id: 2,
+                date: '2024-01-14',
+                category: 'Property Rentals',
+                description: 'Monthly rental income - Downtown apartments',
+                amount: 12500.00,
+                status: 'Received',
+                notes: '15 properties rented'
+            },
+            {
+                id: 3,
+                date: '2024-01-13',
+                category: 'Broker Commissions',
+                description: 'Property listing commission',
+                amount: 3200.00,
+                status: 'Received',
+                notes: 'New listing secured'
+            }
+        ];
+
+        const sampleExpenses = [
+            {
+                id: 1,
+                date: '2024-01-15',
+                category: 'Rental Services',
+                description: 'Notary services for rental agreements',
+                amount: 450.00,
+                status: 'Paid',
+                notes: '5 rental agreements processed'
+            },
+            {
+                id: 2,
+                date: '2024-01-14',
+                category: 'Broker Expenses',
+                description: 'Broker transportation costs',
+                amount: 280.00,
+                status: 'Paid',
+                notes: 'Taxi and fuel expenses'
+            },
+            {
+                id: 3,
+                date: '2024-01-13',
+                category: 'Office Expenses',
+                description: 'Office rent payment',
+                amount: 3200.00,
+                status: 'Paid',
+                notes: 'Monthly office rent'
+            }
+        ];
+
+        // Initialize finances page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Finances page DOM loaded');
+            
+            try {
+                // Load sidebar component with full functionality
+                await window.componentLoader.loadSidebarWithFunctionality('.sidebar-container');
+                
+                // Initialize language manager
+                const languageManager = new LanguageManager();
+                
+                // Wait for language manager to be ready
+                while (!languageManager.initialized) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                // Set up page header language selector
+                setupPageHeaderLanguageSelector();
+                
+                console.log('Finances page initialized successfully');
+                
+                // Initialize modals
+                initializeModals();
+                
+                // Initialize tabs
+                initializeTabs();
+                
+                // Initialize financial data
+                initializeFinancialData();
+                
+                // Set current date for forms
+                document.getElementById('income-date').value = new Date().toISOString().split('T')[0];
+                document.getElementById('expense-date').value = new Date().toISOString().split('T')[0];
+                
+            } catch (error) {
+                console.error('Failed to initialize finances page:', error);
+            }
+        });
+        
+        // Modal functionality
+        function initializeModals() {
+            // Income modal
+            const incomeModal = document.getElementById('addIncomeModal');
+            const addIncomeBtn = document.getElementById('add-income-btn');
+            const closeIncomeBtn = document.getElementById('closeIncomeModal');
+            const cancelIncomeBtn = document.getElementById('cancelIncomeBtn');
+            const incomeForm = document.getElementById('addIncomeForm');
+            
+            // Expense modal
+            const expenseModal = document.getElementById('addExpenseModal');
+            const addExpenseBtn = document.getElementById('add-expense-btn');
+            const closeExpenseBtn = document.getElementById('closeExpenseModal');
+            const cancelExpenseBtn = document.getElementById('cancelExpenseBtn');
+            const expenseForm = document.getElementById('addExpenseForm');
+            
+            // Open income modal
+            addIncomeBtn.addEventListener('click', function() {
+                incomeModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Open expense modal
+            addExpenseBtn.addEventListener('click', function() {
+                expenseModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close modals
+            function closeModal(modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            closeIncomeBtn.addEventListener('click', () => closeModal(incomeModal));
+            cancelIncomeBtn.addEventListener('click', () => closeModal(incomeModal));
+            closeExpenseBtn.addEventListener('click', () => closeModal(expenseModal));
+            cancelExpenseBtn.addEventListener('click', () => closeModal(expenseModal));
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === incomeModal) {
+                    closeModal(incomeModal);
+                }
+                if (event.target === expenseModal) {
+                    closeModal(expenseModal);
+                }
+            });
+            
+            // Form submissions
+            incomeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addNewIncome();
+                closeModal(incomeModal);
+            });
+            
+            expenseForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addNewExpense();
+                closeModal(expenseModal);
+            });
+        }
+
+        // Initialize tabs
+        function initializeTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.dataset.tab;
+                    
+                    // Remove active class from all tabs
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    btn.classList.add('active');
+                    document.getElementById(`${targetTab}-tab`).classList.add('active');
+                });
+            });
+        }
+
+        // Initialize financial data
+        function initializeFinancialData() {
+            populateIncomeTable();
+            populateExpenseTable();
+            populateTransactionTable();
+            setupFilters();
+        }
+
+        // Populate income table
+        function populateIncomeTable(income = sampleIncome) {
+            const tbody = document.getElementById('income-tbody');
+            tbody.innerHTML = '';
+            
+            income.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDate(item.date)}</td>
+                    <td><span class="category-badge ${item.category.toLowerCase().replace(' ', '-')}">${item.category}</span></td>
+                    <td>${item.description}</td>
+                    <td class="amount positive">$${item.amount.toFixed(2)}</td>
+                    <td><span class="status ${item.status.toLowerCase()}">${item.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-secondary" onclick="editIncome(${item.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteIncome(${item.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Populate expense table
+        function populateExpenseTable(expenses = sampleExpenses) {
+            const tbody = document.getElementById('expense-tbody');
+            tbody.innerHTML = '';
+            
+            expenses.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDate(item.date)}</td>
+                    <td><span class="category-badge ${item.category.toLowerCase().replace(' ', '-')}">${item.category}</span></td>
+                    <td>${item.description}</td>
+                    <td class="amount negative">$${item.amount.toFixed(2)}</td>
+                    <td><span class="status ${item.status.toLowerCase()}">${item.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-secondary" onclick="editExpense(${item.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteExpense(${item.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Populate transaction table
+        function populateTransactionTable() {
+            const tbody = document.getElementById('transaction-tbody');
+            tbody.innerHTML = '';
+            
+            // Combine income and expenses for transaction view
+            const allTransactions = [
+                ...sampleIncome.map(item => ({...item, type: 'Income'})),
+                ...sampleExpenses.map(item => ({...item, type: 'Expense'}))
+            ].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            allTransactions.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDate(item.date)}</td>
+                    <td><span class="type-badge ${item.type.toLowerCase()}">${item.type}</span></td>
+                    <td><span class="category-badge ${item.category.toLowerCase().replace(' ', '-')}">${item.category}</span></td>
+                    <td>${item.description}</td>
+                    <td class="amount ${item.type === 'Income' ? 'positive' : 'negative'}">$${item.amount.toFixed(2)}</td>
+                    <td><span class="status ${item.status.toLowerCase()}">${item.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-secondary" onclick="editTransaction(${item.id}, '${item.type}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteTransaction(${item.id}, '${item.type}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Setup filters
+        function setupFilters() {
+            // Income filters
+            document.getElementById('income-category-filter').addEventListener('change', filterIncome);
+            document.getElementById('income-month-filter').addEventListener('change', filterIncome);
+            
+            // Expense filters
+            document.getElementById('expense-category-filter').addEventListener('change', filterExpenses);
+            document.getElementById('expense-month-filter').addEventListener('change', filterExpenses);
+            
+            // Transaction filters
+            document.getElementById('transaction-type-filter').addEventListener('change', filterTransactions);
+            document.getElementById('transaction-month-filter').addEventListener('change', filterTransactions);
+            document.getElementById('transaction-search').addEventListener('input', filterTransactions);
+        }
+
+        // Filter functions
+        function filterIncome() {
+            const categoryFilter = document.getElementById('income-category-filter').value;
+            const monthFilter = document.getElementById('income-month-filter').value;
+            
+            let filtered = sampleIncome;
+            
+            if (categoryFilter) {
+                filtered = filtered.filter(item => item.category === categoryFilter);
+            }
+            
+            if (monthFilter) {
+                filtered = filtered.filter(item => item.date.startsWith(monthFilter));
+            }
+            
+            populateIncomeTable(filtered);
+        }
+
+        function filterExpenses() {
+            const categoryFilter = document.getElementById('expense-category-filter').value;
+            const monthFilter = document.getElementById('expense-month-filter').value;
+            
+            let filtered = sampleExpenses;
+            
+            if (categoryFilter) {
+                filtered = filtered.filter(item => item.category === categoryFilter);
+            }
+            
+            if (monthFilter) {
+                filtered = filtered.filter(item => item.date.startsWith(monthFilter));
+            }
+            
+            populateExpenseTable(filtered);
+        }
+
+        function filterTransactions() {
+            const typeFilter = document.getElementById('transaction-type-filter').value;
+            const monthFilter = document.getElementById('transaction-month-filter').value;
+            const searchFilter = document.getElementById('transaction-search').value.toLowerCase();
+            
+            let filtered = [
+                ...sampleIncome.map(item => ({...item, type: 'Income'})),
+                ...sampleExpenses.map(item => ({...item, type: 'Expense'}))
+            ];
+            
+            if (typeFilter) {
+                filtered = filtered.filter(item => item.type.toLowerCase() === typeFilter.toLowerCase());
+            }
+            
+            if (monthFilter) {
+                filtered = filtered.filter(item => item.date.startsWith(monthFilter));
+            }
+            
+            if (searchFilter) {
+                filtered = filtered.filter(item => 
+                    item.description.toLowerCase().includes(searchFilter) ||
+                    item.category.toLowerCase().includes(searchFilter)
+                );
+            }
+            
+            populateTransactionTable(filtered);
+        }
+
+        // Add new income
+        function addNewIncome() {
+            const formData = new FormData(document.getElementById('addIncomeForm'));
+            const incomeData = Object.fromEntries(formData.entries());
+            
+            const newIncome = {
+                id: sampleIncome.length + 1,
+                date: incomeData.date,
+                category: incomeData.category,
+                description: incomeData.description,
+                amount: parseFloat(incomeData.amount),
+                status: incomeData.status,
+                notes: incomeData.notes
+            };
+            
+            sampleIncome.unshift(newIncome);
+            populateIncomeTable();
+            populateTransactionTable();
+            
+            // Reset form
+            document.getElementById('addIncomeForm').reset();
+            document.getElementById('income-date').value = new Date().toISOString().split('T')[0];
+            
+            alert('Income added successfully!');
+        }
+
+        // Add new expense
+        function addNewExpense() {
+            const formData = new FormData(document.getElementById('addExpenseForm'));
+            const expenseData = Object.fromEntries(formData.entries());
+            
+            const newExpense = {
+                id: sampleExpenses.length + 1,
+                date: expenseData.date,
+                category: expenseData.category,
+                description: expenseData.description,
+                amount: parseFloat(expenseData.amount),
+                status: expenseData.status,
+                notes: expenseData.notes
+            };
+            
+            sampleExpenses.unshift(newExpense);
+            populateExpenseTable();
+            populateTransactionTable();
+            
+            // Reset form
+            document.getElementById('addExpenseForm').reset();
+            document.getElementById('expense-date').value = new Date().toISOString().split('T')[0];
+            
+            alert('Expense added successfully!');
+        }
+
+        // Edit functions (placeholder)
+        function editIncome(id) {
+            alert(`Edit income with ID: ${id}`);
+        }
+
+        function editExpense(id) {
+            alert(`Edit expense with ID: ${id}`);
+        }
+
+        function editTransaction(id, type) {
+            alert(`Edit ${type.toLowerCase()} with ID: ${id}`);
+        }
+
+        // Delete functions (placeholder)
+        function deleteIncome(id) {
+            if (confirm('Are you sure you want to delete this income record?')) {
+                const index = sampleIncome.findIndex(item => item.id === id);
+                if (index > -1) {
+                    sampleIncome.splice(index, 1);
+                    populateIncomeTable();
+                    populateTransactionTable();
+                }
+            }
+        }
+
+        function deleteExpense(id) {
+            if (confirm('Are you sure you want to delete this expense record?')) {
+                const index = sampleExpenses.findIndex(item => item.id === id);
+                if (index > -1) {
+                    sampleExpenses.splice(index, 1);
+                    populateExpenseTable();
+                    populateTransactionTable();
+                }
+            }
+        }
+
+        function deleteTransaction(id, type) {
+            if (type === 'Income') {
+                deleteIncome(id);
+            } else {
+                deleteExpense(id);
+            }
+        }
+
+        // Export functions (placeholder)
+        function exportIncomeData() {
+            alert('Exporting income data...');
+        }
+
+        function exportExpenseData() {
+            alert('Exporting expense data...');
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        // Set up page header language selector
+        function setupPageHeaderLanguageSelector() {
+            const languageSelector = document.querySelector('.page-header .language-selector');
+            if (languageSelector) {
+                const currentLang = document.documentElement.lang || 'en';
+                languageSelector.value = currentLang;
+                
+                languageSelector.addEventListener('change', (e) => {
+                    const newLang = e.target.value;
+                    if (window.languageManager) {
+                        window.languageManager.setLanguage(newLang);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

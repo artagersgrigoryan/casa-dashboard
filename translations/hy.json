@@ -1,0 +1,154 @@
+{
+  "nav": {
+    "title": "Անշարժ գույքի կառավարում",
+    "dashboard": "Գլխավոր էջ",
+    "customers": "Հաճախորդներ",
+    "properties": "Գույքեր",
+    "employees": "Աշխատակիցներ",
+    "finances": "Ֆինանսներ",
+    "settings": "Կարգավորումներ"
+  },
+  "dashboard": {
+    "title": "Գլխավոր էջ",
+    "subtitle": "Բարի գալուստ! Ահա թե ինչ է կատարվում ձեր գույքի հետ:",
+    "theme": "Թեմա"
+  },
+  "stats": {
+    "totalProperty": "Ընդհանուր գույքեր",
+    "occupiedApartments": "Զբաղված բնակարաններ",
+    "monthlyIncome": "Ամսական եկամուտ",
+    "maintenanceRequests": "Նորոգման հարցումներ"
+  },
+  "content": {
+    "recentProperties": "Վերջին գույքեր",
+    "recentActivity": "Վերջին գործունեություն",
+    "propertyStatus": {
+      "occupied": "Զբաղված",
+      "available": "Հասանելի",
+      "maintenance": "Նորոգում"
+    }
+  },
+  "activity": {
+    "newTenant": "Նոր վարձակալ տեղափոխվեց A1 բնակարան",
+    "maintenanceRequest": "Նորոգման հարցում C2 բնակարանի համար",
+    "rentPayment": "Վարձավճար ստացվեց B3 բնակարանից",
+    "inspectionCompleted": "Գույքի ստուգում ավարտված է",
+    "listingPublished": "Նոր գույքի հայտարարություն հրապարակված է"
+  },
+  "time": {
+    "hoursAgo": "ժամ առաջ",
+    "daysAgo": "օր առաջ"
+  },
+  "properties": {
+    "luxuryPenthouse": "Համալիր պենտհաուս A1",
+    "modernStudio": "Ժամանակակից ստուդիո B3",
+    "executiveSuite": "Գործադիր սյուիտ C2",
+    "premiumLoft": "Պրեմիում լոֆտ D1",
+    "deluxeApartment": "Դելյուքս բնակարան E4"
+  },
+  "addApartment": {
+    "title": "Ավելացնել նոր բնակարան",
+    "basicInfo": "Հիմնական տեղեկություն",
+    "propertyName": "Գույքի անվանում",
+    "propertyType": "Գույքի տեսակ",
+    "selectType": "Ընտրեք տեսակ",
+    "apartment": "Բնակարան",
+    "studio": "Ստուդիո",
+    "penthouse": "Պենտհաուս",
+    "loft": "Լոֆտ",
+    "duplex": "Դուպլեքս",
+    "address": "Հասցե",
+    "city": "Քաղաք",
+    "state": "Նահանգ/Մարզ",
+    "zipCode": "Բնակարանային կոդ",
+    "country": "Երկիր",
+    "floor": "Հարկ",
+    "propertyDetails": "Գույքի մանրամասներ",
+    "bedrooms": "Ննջասենյակներ",
+    "bathrooms": "Լոգասենյակներ",
+    "squareFootage": "Քառակուսի մետր",
+    "parkingSpaces": "Ավտոկայանատեղեր",
+    "yearBuilt": "Կառուցման տարի",
+    "condition": "Վիճակ",
+    "selectCondition": "Ընտրեք վիճակ",
+    "excellent": "Գերազանց",
+    "good": "Լավ",
+    "fair": "Միջին",
+    "needsRepair": "Պահանջում է նորոգում",
+    "financialInfo": "Ֆինանսական տեղեկություն",
+    "monthlyRent": "Ամսական վարձավճար",
+    "securityDeposit": "Ապահովագրական ավանդ",
+    "utilitiesIncluded": "Ներառված կոմունալ ծառայություններ",
+    "selectOption": "Ընտրեք տարբերակ",
+    "none": "Ոչինչ",
+    "water": "Ջուր",
+    "electricity": "Էլեկտրաէներգիա",
+    "gas": "Գազ",
+    "internet": "Ինտերնետ",
+    "allUtilities": "Բոլոր կոմունալ ծառայությունները",
+    "petPolicy": "Կենդանիների քաղաքականություն",
+    "selectPolicy": "Ընտրեք քաղաքականություն",
+    "noPets": "Կենդանիներ չեն թույլատրվում",
+    "catsOnly": "Միայն կատուներ",
+    "dogsOnly": "Միայն շներ",
+    "petsAllowed": "Կենդանիներ թույլատրվում են",
+    "amenities": "Հարմարություններ",
+    "airConditioning": "Օդորակիչ",
+    "heating": "Ջեռուցում",
+    "balcony": "Պատշգամբ",
+    "elevator": "Լիֆտ",
+    "gym": "Սպորտասրահ",
+    "pool": "Լողավազան",
+    "parking": "Ավտոկայանատեղ",
+    "laundry": "Լվացքատուն",
+    "description": "Նկարագրություն",
+    "propertyDescription": "Գույքի նկարագրություն",
+    "descriptionPlaceholder": "Նկարագրեք գույքը, նրա առանձնահատկությունները և հատուկ նշումները...",
+    "photos": "Լուսանկարներ",
+    "uploadPhotos": "Վերբեռնել լուսանկարներ",
+    "photosHelp": "Դուք կարող եք ընտրել մի քանի լուսանկար: Աջակցվող ձևաչափեր՝ JPG, PNG, GIF",
+    "addApartment": "Ավելացնել բնակարան",
+    "cancel": "Չեղարկել"
+  },
+  "user": {
+    "name": "Ադմինիստրատոր",
+    "role": "Ադմինիստրատոր"
+  },
+  "settings": {
+    "title": "Կարգավորումներ",
+    "subtitle": "Կառավարեք ձեր գլխավոր էջի նախապատվությունները և կարգավորումները",
+    "language": {
+      "title": "Լեզու",
+      "description": "Ընտրեք ձեր նախընտրած լեզուն գլխավոր էջի միջերեսի համար"
+    },
+    "theme": {
+      "title": "Թեմա",
+      "description": "Ընտրեք ձեր նախընտրած տեսողական թեման գլխավոր էջի համար",
+      "light": "Բաց թեմա",
+      "lightDesc": "Մաքուր և պայծառ միջերես",
+      "dark": "Մուգ թեմա",
+      "darkDesc": "Ժամանակակից մուգ միջերես"
+    }
+  },
+  "common": {
+    "required": "Պարտադիր",
+    "loading": "Բեռնվում է...",
+    "save": "Պահպանել",
+    "edit": "Խմբագրել",
+    "delete": "Ջնջել",
+    "view": "Դիտել",
+    "close": "Փակել",
+    "submit": "Ներկայացնել",
+    "back": "Հետ",
+    "next": "Հաջորդ",
+    "previous": "Նախորդ",
+    "search": "Որոնել",
+    "filter": "Զտիչ",
+    "sort": "Տեսակավորել",
+    "refresh": "Թարմացնել",
+    "export": "Արտահանել",
+    "import": "Ներմուծել",
+    "download": "Ներբեռնել",
+    "upload": "Վերբեռնել"
+  }
+}

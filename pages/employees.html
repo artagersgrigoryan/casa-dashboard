@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees - Property Management Dashboard</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Container -->
+        <div class="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mobile Sidebar Toggle -->
+            <button class="mobile-sidebar-toggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-center">
+                    <h1 class="page-title">Employees</h1>
+                </div>
+                <div class="header-right">
+                    <!-- Language Selector -->
+                    <select id="languageSelector" class="language-selector">
+                        <option value="en">English</option>
+                        <option value="hy">Հայերեն</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                    <!-- Add Employee Button -->
+                    <button class="btn btn-primary" id="add-employee-btn">
+                        <i class="fas fa-plus"></i>
+                        Add Employee
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content-wrapper">
+                <!-- Filters Section -->
+                <div class="filters-section">
+                    <div class="filters-row">
+                        <div class="filter-group">
+                            <label for="department-filter">Department</label>
+                            <select id="department-filter" class="filter-select">
+                                <option value="">All Departments</option>
+                                <option value="management">Management</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="sales">Sales</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="finance">Finance</option>
+                                <option value="hr">Human Resources</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="phone-filter">Phone Number</label>
+                            <input type="text" id="phone-filter" class="filter-input" placeholder="Enter phone number">
+                        </div>
+                        <div class="filter-group">
+                            <label for="status-filter">Status</label>
+                            <select id="status-filter" class="filter-select">
+                                <option value="">All Statuses</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="on-leave">On Leave</option>
+                            </select>
+                        </div>
+                        <div class="filter-actions">
+                            <button class="btn btn-secondary" id="clear-filters">
+                                <i class="fas fa-times"></i>
+                                Clear Filters
+                            </button>
+                            <button class="btn btn-primary" id="apply-filters">
+                                <i class="fas fa-search"></i>
+                                Apply Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employees Table -->
+                <div class="table-container">
+                    <table class="customers-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Description</th>
+                                <th>Staff</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sarah Johnson</td>
+                                <td>+1 (555) 123-4567</td>
+                                <td>Experienced property manager with 8 years in real estate</td>
+                                <td><span class="staff-badge staff-ceo">CEO</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary edit-employee" data-id="1">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mike Wilson</td>
+                                <td>+1 (555) 987-6543</td>
+                                <td>Creative marketing specialist focused on property promotion</td>
+                                <td><span class="staff-badge staff-marketing">Marketing</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary edit-employee" data-id="2">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lisa Chen</td>
+                                <td>+1 (555) 456-7890</td>
+                                <td>Skilled sales agent with excellent customer relations</td>
+                                <td><span class="staff-badge staff-sales">Sales</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary edit-employee" data-id="3">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>David Rodriguez</td>
+                                <td>+1 (555) 321-0987</td>
+                                <td>Certified maintenance technician with 5 years experience</td>
+                                <td><span class="staff-badge staff-maintenance">Maintenance</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary edit-employee" data-id="4">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Emily Davis</td>
+                                <td>+1 (555) 654-3210</td>
+                                <td>Financial analyst specializing in property investments</td>
+                                <td><span class="staff-badge staff-finance">Finance</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary edit-employee" data-id="5">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Robert Brown</td>
+                                <td>+1 (555) 789-0123</td>
+                                <td>HR professional managing recruitment and employee relations</td>
+                                <td><span class="staff-badge staff-hr">Human Resources</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary edit-employee" data-id="6">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jennifer Lee</td>
+                                <td>+1 (555) 234-5678</td>
+                                <td>Property inspector with attention to detail</td>
+                                <td><span class="staff-badge staff-maintenance">Maintenance</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary edit-employee" data-id="7">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thomas Anderson</td>
+                                <td>+1 (555) 876-5432</td>
+                                <td>Digital marketing expert for online property listings</td>
+                                <td><span class="staff-badge staff-marketing">Marketing</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary edit-employee" data-id="8">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Employee Modal -->
+    <div id="addEmployeeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Employee</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addEmployeeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employeeName">Full Name *</label>
+                            <input type="text" id="employeeName" name="employeeName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="employeePhone">Phone Number *</label>
+                            <input type="tel" id="employeePhone" name="employeePhone" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employeeEmail">Email *</label>
+                            <input type="email" id="employeeEmail" name="employeeEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="employeeDepartment">Department *</label>
+                            <select id="employeeDepartment" name="employeeDepartment" required>
+                                <option value="">Select Department</option>
+                                <option value="management">Management</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="sales">Sales</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="finance">Finance</option>
+                                <option value="hr">Human Resources</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="employeeDescription">Description</label>
+                        <textarea id="employeeDescription" name="employeeDescription" rows="3" placeholder="Brief description of the employee's role and experience..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employeeHireDate">Hire Date</label>
+                            <input type="date" id="employeeHireDate" name="employeeHireDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="employeeStatus">Status</label>
+                            <select id="employeeStatus" name="employeeStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="on-leave">On Leave</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button type="submit" form="addEmployeeForm" class="btn btn-primary">Add Employee</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/component-loader.js"></script>
+    <script src="../js/language-manager.js"></script>
+    <script src="../js/translation-utils.js"></script>
+    <script>
+        // Initialize employees page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Employees page DOM loaded');
+            
+            try {
+                // Load sidebar component with full functionality
+                await window.componentLoader.loadSidebarWithFunctionality('.sidebar-container');
+                
+                // Initialize language manager
+                const languageManager = new LanguageManager();
+                
+                // Wait for language manager to be ready
+                while (!languageManager.initialized) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                // Set up page header language selector
+                setupPageHeaderLanguageSelector();
+                
+                console.log('Employees page initialized successfully');
+                
+                // Initialize modal functionality
+                initializeModal();
+                
+                // Initialize filters
+                initializeFilters();
+                
+            } catch (error) {
+                console.error('Failed to initialize employees page:', error);
+            }
+        });
+        
+        // Modal functionality
+        function initializeModal() {
+            const modal = document.getElementById('addEmployeeModal');
+            const addBtn = document.getElementById('add-employee-btn');
+            const closeBtn = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const form = document.getElementById('addEmployeeForm');
+            
+            // Open modal
+            addBtn.addEventListener('click', function() {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close modal
+            function closeModal() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                form.reset();
+            }
+            
+            closeBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would typically send the data to your backend
+                console.log('Form submitted:', new FormData(form));
+                alert('Employee added successfully!');
+                closeModal();
+            });
+        }
+
+        // Initialize filters
+        function initializeFilters() {
+            const clearFiltersBtn = document.getElementById('clear-filters');
+            const applyFiltersBtn = document.getElementById('apply-filters');
+            
+            // Clear filters
+            clearFiltersBtn.addEventListener('click', function() {
+                document.getElementById('department-filter').value = '';
+                document.getElementById('phone-filter').value = '';
+                document.getElementById('status-filter').value = '';
+            });
+            
+            // Apply filters
+            applyFiltersBtn.addEventListener('click', function() {
+                const filters = {
+                    department: document.getElementById('department-filter').value,
+                    phone: document.getElementById('phone-filter').value,
+                    status: document.getElementById('status-filter').value
+                };
+                
+                console.log('Applying filters:', filters);
+                // Here you would typically filter the table data
+                // For now, just log the filters
+            });
+        }
+
+        // Set up page header language selector
+        function setupPageHeaderLanguageSelector() {
+            const languageSelector = document.querySelector('.page-header .language-selector');
+            if (languageSelector) {
+                const currentLang = document.documentElement.lang || 'en';
+                languageSelector.value = currentLang;
+                
+                languageSelector.addEventListener('change', (e) => {
+                    const newLang = e.target.value;
+                    if (window.languageManager) {
+                        window.languageManager.setLanguage(newLang);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

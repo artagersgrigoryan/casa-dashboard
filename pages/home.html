@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Property Management</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Container -->
+        <div class="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mobile Sidebar Toggle -->
+            <button class="mobile-sidebar-toggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-center">
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <!-- Language Selector -->
+                    <select id="languageSelector" class="language-selector">
+                        <option value="en">English</option>
+                        <option value="hy">Հայերեն</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Main Content Wrapper -->
+            <div class="main-content-wrapper">
+                <!-- Dashboard Filters -->
+                <div class="dashboard-filters">
+                <div class="filter-group">
+                    <label for="dateRange">Date Range</label>
+                    <select id="dateRange" class="filter-select">
+                        <option value="7">Last 7 Days</option>
+                        <option value="30" selected>Last 30 Days</option>
+                        <option value="90">Last 3 Months</option>
+                        <option value="365">Last Year</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="propertyType">Property Type</label>
+                    <select id="propertyType" class="filter-select">
+                        <option value="">All Types</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="studio">Studio</option>
+                        <option value="penthouse">Penthouse</option>
+                        <option value="loft">Loft</option>
+                        <option value="duplex">Duplex</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="statusFilter">Status</label>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">All Status</option>
+                        <option value="available">Available</option>
+                        <option value="occupied">Occupied</option>
+                        <option value="maintenance">Maintenance</option>
+                        <option value="reserved">Reserved</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="locationFilter">Location</label>
+                    <select id="locationFilter" class="filter-select">
+                        <option value="">All Locations</option>
+                        <option value="downtown">Downtown</option>
+                        <option value="suburban">Suburban</option>
+                        <option value="rural">Rural</option>
+                    </select>
+                </div>
+                <button class="btn btn-secondary" id="applyFilters">
+                    <i class="fas fa-filter"></i>
+                    Apply Filters
+                </button>
+                <button class="btn btn-outline" id="resetFilters">
+                    <i class="fas fa-undo"></i>
+                    Reset
+                </button>
+            </div>
+
+            <!-- Enhanced Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalProperties">24</div>
+                        <div class="stat-label">Total Properties</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+2 this month</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="occupiedProperties">18</div>
+                        <div class="stat-label">Occupied</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>75% occupancy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="monthlyIncome">$45,200</div>
+                        <div class="stat-label">Monthly Income</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12.5% vs last month</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="maintenanceRequests">3</div>
+                        <div class="stat-label">Maintenance</div>
+                        <div class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>-2 from last week</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Revenue Overview</h3>
+                        <div class="chart-controls">
+                            <button class="chart-btn active" data-period="monthly">Monthly</button>
+                            <button class="chart-btn" data-period="quarterly">Quarterly</button>
+                            <button class="chart-btn" data-period="yearly">Yearly</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Property Status Distribution</h3>
+                        <div class="chart-legend">
+                            <span class="legend-item">
+                                <span class="legend-color available"></span>
+                                Available
+                            </span>
+                            <span class="legend-item">
+                                <span class="legend-color occupied"></span>
+                                Occupied
+                            </span>
+                            <span class="legend-item">
+                                <span class="legend-color maintenance"></span>
+                                Maintenance
+                            </span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="statusChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-section">
+                <div class="summary-card">
+                    <div class="summary-header">
+                        <h3>Financial Summary</h3>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="summary-content">
+                        <div class="summary-item">
+                            <span class="summary-label">Total Revenue (YTD)</span>
+                            <span class="summary-value">$542,400</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Average Rent</span>
+                            <span class="summary-value">$2,260</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Vacancy Rate</span>
+                            <span class="summary-value">25%</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Collection Rate</span>
+                            <span class="summary-value">98.5%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-header">
+                        <h3>Property Performance</h3>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="summary-content">
+                        <div class="summary-item">
+                            <span class="summary-label">Top Performing</span>
+                            <span class="summary-value">Penthouse A1</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Rent Increase</span>
+                            <span class="summary-value">+8.2%</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Tenant Satisfaction</span>
+                            <span class="summary-value">4.8/5.0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Renewal Rate</span>
+                            <span class="summary-value">87%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-header">
+                        <h3>Market Insights</h3>
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="summary-content">
+                        <div class="summary-item">
+                            <span class="summary-label">Market Trend</span>
+                            <span class="summary-value positive">↗️ Rising</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Competition</span>
+                            <span class="summary-value">Medium</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Demand Level</span>
+                            <span class="summary-value">High</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Price Per Sq Ft</span>
+                            <span class="summary-value">$2.85</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Content Grid -->
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Properties</h3>
+                        <button class="btn btn-sm btn-outline" onclick="viewAllProperties()">
+                            View All
+                        </button>
+                    </div>
+                    <div class="property-list-container">
+                        <ul class="property-list" id="propertyList">
+                            <!-- Properties will be populated by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Activity</h3>
+                        <button class="btn btn-sm btn-outline" onclick="viewAllActivity()">
+                            View All
+                        </button>
+                    </div>
+                    <div class="activity-list-container">
+                        <ul class="activity-list" id="activityList">
+                            <!-- Activities will be populated by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="actions-grid">
+                    <button class="action-btn" onclick="showMaintenanceForm()">
+                        <i class="fas fa-tools"></i>
+                        <span>Report Maintenance</span>
+                    </button>
+                    <button class="action-btn" onclick="showTenantForm()">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add Tenant</span>
+                    </button>
+                    <button class="action-btn" onclick="showInspectionForm()">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>Schedule Inspection</span>
+                    </button>
+                    <button class="action-btn" onclick="showPaymentForm()">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Record Payment</span>
+                    </button>
+                    <button class="action-btn" onclick="generateReport()">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Generate Report</span>
+                    </button>
+                    <button class="action-btn" onclick="showAnalytics()">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>View Analytics</span>
+                    </button>
+                </div>
+            </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Apartment Modal -->
+    <div id="addApartmentModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Add New Apartment</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addApartmentForm">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3>Basic Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="propertyName">Property Name *</label>
+                                <input type="text" id="propertyName" name="propertyName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="propertyType">Property Type *</label>
+                                <select id="propertyType" name="propertyType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="apartment">Apartment</option>
+                                    <option value="studio">Studio</option>
+                                    <option value="penthouse">Penthouse</option>
+                                    <option value="loft">Loft</option>
+                                    <option value="duplex">Duplex</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address">Address *</label>
+                                <input type="text" id="address" name="address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="state">State/Province *</label>
+                                <input type="text" id="state" name="state" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zipCode">ZIP/Postal Code *</label>
+                                <input type="text" id="zipCode" name="zipCode" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="country">Country *</label>
+                                <input type="text" id="country" name="country" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="floor">Floor</label>
+                                <input type="number" id="floor" name="floor" min="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property Details -->
+                    <div class="form-section">
+                        <h3>Property Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bedrooms">Bedrooms *</label>
+                                <input type="number" id="bedrooms" name="bedrooms" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bathrooms">Bathrooms *</label>
+                                <input type="number" id="bathrooms" name="bathrooms" min="0" step="0.5" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="squareFootage">Square Footage</label>
+                                <input type="number" id="squareFootage" name="squareFootage" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="parkingSpaces">Parking Spaces</label>
+                                <input type="number" id="parkingSpaces" name="parkingSpaces" min="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="yearBuilt">Year Built</label>
+                                <input type="number" id="yearBuilt" name="yearBuilt" min="1800" max="2030">
+                            </div>
+                            <div class="form-group">
+                                <label for="condition">Condition</label>
+                                <select id="condition" name="condition">
+                                    <option value="">Select Condition</option>
+                                    <option value="excellent">Excellent</option>
+                                    <option value="good">Good</option>
+                                    <option value="fair">Fair</option>
+                                    <option value="needs_repair">Needs Repair</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Information -->
+                    <div class="form-section">
+                        <h3>Financial Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="monthlyRent">Monthly Rent *</label>
+                                <input type="number" id="monthlyRent" name="monthlyRent" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="securityDeposit">Security Deposit</label>
+                                <input type="number" id="securityDeposit" name="securityDeposit" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="utilitiesIncluded">Utilities Included</label>
+                                <select id="utilitiesIncluded" name="utilitiesIncluded">
+                                    <option value="">Select Option</option>
+                                    <option value="none">None</option>
+                                    <option value="water">Water</option>
+                                    <option value="electricity">Electricity</option>
+                                    <option value="gas">Gas</option>
+                                    <option value="internet">Internet</option>
+                                    <option value="all">All Utilities</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="petPolicy">Pet Policy</label>
+                                <select id="petPolicy" name="petPolicy">
+                                    <option value="">Select Policy</option>
+                                    <option value="no_pets">No Pets</option>
+                                    <option value="cats_only">Cats Only</option>
+                                    <option value="dogs_only">Dogs Only</option>
+                                    <option value="pets_allowed">Pets Allowed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Amenities -->
+                    <div class="form-section">
+                        <h3>Amenities</h3>
+                        <div class="amenities-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="air_conditioning">
+                                <span>Air Conditioning</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="heating">
+                                <span>Heating</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="balcony">
+                                <span>Balcony</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="elevator">
+                                <span>Elevator</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="gym">
+                                <span>Gym</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="pool">
+                                <span>Pool</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="parking">
+                                <span>Parking</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="laundry">
+                                <span>Laundry</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-section">
+                        <h3>Description</h3>
+                        <div class="form-group">
+                            <label for="description">Property Description</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Describe the property, its features, and any special notes..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Photos -->
+                    <div class="form-section">
+                        <h3>Photos</h3>
+                        <div class="form-group">
+                            <label for="photos">Upload Photos</label>
+                            <input type="file" id="photos" name="photos" multiple accept="image/*">
+                            <small>You can select multiple photos. Supported formats: JPG, PNG, GIF</small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button type="submit" form="addApartmentForm" class="btn btn-primary">Add Apartment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/component-loader.js"></script>
+    <script src="../js/language-manager.js"></script>
+    <script src="../js/translation-utils.js"></script>
+    <script>
+        // Sample data for charts and summaries
+        const dashboardData = {
+            properties: [
+                { name: 'Luxury Penthouse A1', status: 'occupied', type: 'penthouse', location: 'downtown', rent: 4500 },
+                { name: 'Modern Studio B3', status: 'available', type: 'studio', location: 'suburban', rent: 1800 },
+                { name: 'Executive Suite C2', status: 'maintenance', type: 'apartment', location: 'downtown', rent: 3200 },
+                { name: 'Premium Loft D1', status: 'occupied', type: 'loft', location: 'downtown', rent: 3800 },
+                { name: 'Deluxe Apartment E4', status: 'available', type: 'apartment', location: 'suburban', rent: 2200 }
+            ],
+            activities: [
+                { text: 'New tenant moved into A1 apartment', time: '2 hours ago', type: 'tenant' },
+                { text: 'Maintenance request for C2 apartment', time: '4 hours ago', type: 'maintenance' },
+                { text: 'Rent received from B3 apartment', time: '1 day ago', type: 'payment' },
+                { text: 'Property inspection completed', time: '2 days ago', type: 'inspection' },
+                { text: 'New property listing published', time: '3 days ago', type: 'listing' }
+            ],
+            revenue: {
+                monthly: [42000, 43500, 41800, 45200, 46800, 47500, 48200, 48900, 49600, 50300, 51000, 51700],
+                quarterly: [127300, 141800, 156300, 170800],
+                yearly: [517000, 542400]
+            }
+        };
+
+        // Initialize home page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Home page DOM loaded');
+            
+            try {
+                // Load sidebar component with full functionality
+                await window.componentLoader.loadSidebarWithFunctionality('.sidebar-container');
+                
+                // Initialize language manager
+                const languageManager = new LanguageManager();
+                
+                // Wait for language manager to be ready
+                while (!languageManager.initialized) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                // Set up page header language selector
+                setupPageHeaderLanguageSelector();
+                
+                console.log('Home page initialized successfully');
+                
+                // Initialize all dashboard functionality
+                initializeDashboard();
+                
+            } catch (error) {
+                console.error('Failed to initialize home page:', error);
+            }
+        });
+        
+        // Initialize dashboard functionality
+        function initializeDashboard() {
+            initializeModal();
+            initializeFilters();
+            populatePropertyList();
+            populateActivityList();
+            initializeCharts();
+            setupFilterEventListeners();
+        }
+
+        // Initialize filters
+        function initializeFilters() {
+            // Set default values
+            document.getElementById('dateRange').value = '30';
+            document.getElementById('propertyType').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('locationFilter').value = '';
+        }
+
+        // Set up filter event listeners
+        function setupFilterEventListeners() {
+            document.getElementById('applyFilters').addEventListener('click', applyFilters);
+            document.getElementById('resetFilters').addEventListener('click', resetFilters);
+            
+            // Auto-apply filters on change
+            document.getElementById('dateRange').addEventListener('change', applyFilters);
+            document.getElementById('propertyType').addEventListener('change', applyFilters);
+            document.getElementById('statusFilter').addEventListener('change', applyFilters);
+            document.getElementById('locationFilter').addEventListener('change', applyFilters);
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const dateRange = document.getElementById('dateRange').value;
+            const propertyType = document.getElementById('propertyType').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const locationFilter = document.getElementById('locationFilter').value;
+            
+            console.log('Applying filters:', { dateRange, propertyType, statusFilter, locationFilter });
+            
+            // Filter properties
+            let filteredProperties = dashboardData.properties;
+            
+            if (propertyType) {
+                filteredProperties = filteredProperties.filter(p => p.type === propertyType);
+            }
+            
+            if (statusFilter) {
+                filteredProperties = filteredProperties.filter(p => p.status === statusFilter);
+            }
+            
+            if (locationFilter) {
+                filteredProperties = filteredProperties.filter(p => p.location === locationFilter);
+            }
+            
+            // Update displays
+            populatePropertyList(filteredProperties);
+            updateStats(filteredProperties);
+            
+            // Show notification
+            showNotification('Filters applied successfully!', 'success');
+        }
+
+        // Reset filters
+        function resetFilters() {
+            initializeFilters();
+            populatePropertyList();
+            updateStats(dashboardData.properties);
+            showNotification('Filters reset successfully!', 'success');
+        }
+
+        // Update statistics
+        function updateStats(properties) {
+            const total = properties.length;
+            const occupied = properties.filter(p => p.status === 'occupied').length;
+            const available = properties.filter(p => p.status === 'available').length;
+            const maintenance = properties.filter(p => p.status === 'maintenance').length;
+            
+            const totalRent = properties.reduce((sum, p) => sum + p.rent, 0);
+            
+            document.getElementById('totalProperties').textContent = total;
+            document.getElementById('occupiedProperties').textContent = occupied;
+            document.getElementById('monthlyIncome').textContent = `$${totalRent.toLocaleString()}`;
+            document.getElementById('maintenanceRequests').textContent = maintenance;
+        }
+
+        // Populate property list
+        function populatePropertyList(properties = dashboardData.properties) {
+            const propertyList = document.getElementById('propertyList');
+            propertyList.innerHTML = '';
+            
+            properties.forEach(property => {
+                const li = document.createElement('li');
+                li.className = 'property-item';
+                li.innerHTML = `
+                    <span class="property-name">${property.name}</span>
+                    <span class="property-status status-${property.status}">${property.status.charAt(0).toUpperCase() + property.status.slice(1)}</span>
+                `;
+                propertyList.appendChild(li);
+            });
+        }
+
+        // Populate activity list
+        function populateActivityList(activities = dashboardData.activities) {
+            const activityList = document.getElementById('activityList');
+            activityList.innerHTML = '';
+            
+            activities.forEach(activity => {
+                const li = document.createElement('li');
+                li.className = 'activity-item';
+                li.innerHTML = `
+                    <div class="activity-content">
+                        <p>${activity.text}</p>
+                        <span class="activity-time">${activity.time}</span>
+                    </div>
+                `;
+                activityList.appendChild(li);
+            });
+        }
+
+        // Initialize charts
+        function initializeCharts() {
+            initializeRevenueChart();
+            initializeStatusChart();
+        }
+
+        // Initialize revenue chart
+        function initializeRevenueChart() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            const revenueChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Monthly Revenue',
+                        data: dashboardData.revenue.monthly,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize status chart
+        function initializeStatusChart() {
+            const ctx = document.getElementById('statusChart').getContext('2d');
+            
+            const statusChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Available', 'Occupied', 'Maintenance'],
+                    datasets: [{
+                        data: [6, 18, 3],
+                        backgroundColor: [
+                            '#10b981',
+                            '#3b82f6',
+                            '#f59e0b'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Quick action functions
+        function showMaintenanceForm() {
+            showNotification('Maintenance form will be implemented', 'info');
+        }
+
+        function showTenantForm() {
+            showNotification('Tenant form will be implemented', 'info');
+        }
+
+        function showInspectionForm() {
+            showNotification('Inspection form will be implemented', 'info');
+        }
+
+        function showPaymentForm() {
+            showNotification('Payment form will be implemented', 'info');
+        }
+
+        function generateReport() {
+            showNotification('Report generation will be implemented', 'info');
+        }
+
+        function showAnalytics() {
+            showNotification('Analytics dashboard will be implemented', 'info');
+        }
+
+        function viewAllProperties() {
+            showNotification('Redirecting to properties page...', 'info');
+        }
+
+        function viewAllActivity() {
+            showNotification('Redirecting to activity log...', 'info');
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close">&times;</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+            
+            notification.querySelector('.notification-close').addEventListener('click', () => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            });
+        }
+        
+        // Modal functionality
+        function initializeModal() {
+            const modal = document.getElementById('addApartmentModal');
+            const addBtn = document.getElementById('addApartmentBtn');
+            const closeBtn = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const form = document.getElementById('addApartmentForm');
+            
+            // Open modal
+            addBtn.addEventListener('click', function() {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close modal
+            function closeModal() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                form.reset();
+            }
+            
+            closeBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would typically send the data to your backend
+                console.log('Form submitted:', new FormData(form));
+                showNotification('Apartment added successfully!', 'success');
+                closeModal();
+            });
+        }
+        
+        // Set up page header language selector
+        function setupPageHeaderLanguageSelector() {
+            const languageSelector = document.querySelector('.page-header .language-selector');
+            if (languageSelector) {
+                const currentLang = document.documentElement.lang || 'en';
+                languageSelector.value = currentLang;
+                
+                languageSelector.addEventListener('change', (e) => {
+                    const newLang = e.target.value;
+                    if (window.languageManager) {
+                        window.languageManager.setLanguage(newLang);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

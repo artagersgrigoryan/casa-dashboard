@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details - Property Management Dashboard</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="property-detail-page">
+    <div class="dashboard-container">
+        <!-- Sidebar Container -->
+        <div class="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mobile Sidebar Toggle -->
+            <button class="mobile-sidebar-toggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-center">
+                    <div class="breadcrumb">
+                        <a href="properties.html" class="btn btn-secondary btn-sm breadcrumb-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                    <h1 class="page-title">Luxury Penthouse A1</h1>
+                </div>
+                <div class="header-right">
+                    <!-- Language Selector -->
+                    <select id="languageSelector" class="language-selector">
+                        <option value="en">English</option>
+                        <option value="hy">Հայերեն</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                    <!-- Action Buttons -->
+                    <button class="btn btn-secondary" id="edit-property-btn">
+                        <i class="fas fa-edit"></i>
+                        Edit Property
+                    </button>
+                    <button class="btn btn-primary" id="book-property-btn">
+                        <i class="fas fa-calendar-check"></i>
+                        Book Viewing
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content-wrapper">
+                <!-- Property Content Grid -->
+                <div class="property-content-grid">
+                    <!-- Left Column - Images & Details -->
+                    <div class="property-left-column">
+                        <!-- Property Images -->
+                        <div class="property-images-section">
+                            <div class="main-image">
+                                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=500&fit=crop" alt="Luxury Penthouse A1" id="main-property-image">
+                                <button class="image-nav-btn prev-btn" onclick="changeImage(-1)">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="image-nav-btn next-btn" onclick="changeImage(1)">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="image-thumbnails">
+                                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=150&h=100&fit=crop" alt="Main View" class="thumbnail active" onclick="selectImage(0)">
+                                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=150&h=100&fit=crop" alt="Living Room" class="thumbnail" onclick="selectImage(1)">
+                                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=150&h=100&fit=crop" alt="Kitchen" class="thumbnail" onclick="selectImage(2)">
+                                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=150&h=100&fit=crop" alt="Bedroom" class="thumbnail" onclick="selectImage(3)">
+                                <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=150&h=100&fit=crop" alt="Bathroom" class="thumbnail" onclick="selectImage(4)">
+                            </div>
+                        </div>
+
+
+
+                        <!-- Property Description -->
+                        <div class="property-description-section">
+                            <h3>Description</h3>
+                            <p>This stunning luxury penthouse offers the perfect blend of elegance and comfort. Located in the heart of downtown, this property features breathtaking city views, high-end finishes, and premium amenities. The open-concept living area seamlessly connects to a gourmet kitchen with stainless steel appliances and granite countertops.</p>
+                            <p>The master suite includes a walk-in closet and an en-suite bathroom with dual vanities and a soaking tub. Additional features include hardwood floors throughout, floor-to-ceiling windows, and a private balcony perfect for entertaining or relaxing.</p>
+                        </div>
+
+                        <!-- Location Card -->
+                        <div class="location-card">
+                            <h3>Location</h3>
+                            <div class="location-info">
+                                <div class="address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>123 Luxury Avenue, Downtown</span>
+                                </div>
+                                <div class="city-state">
+                                    <span>New York, NY 10001</span>
+                                </div>
+                                <div class="neighborhood">
+                                    <span>Downtown Financial District</span>
+                                </div>
+                            </div>
+                            <div class="map-placeholder">
+                                <div class="map-container">
+                                    <i class="fas fa-map"></i>
+                                    <span>Interactive Map</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Property Features -->
+                        <div class="property-features-section">
+                            <h3>Features & Amenities</h3>
+                            <div class="features-grid">
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-home"></i> Interior Features</h4>
+                                    <ul>
+                                        <li>Hardwood floors</li>
+                                        <li>Floor-to-ceiling windows</li>
+                                        <li>Walk-in closets</li>
+                                        <li>Granite countertops</li>
+                                        <li>Stainless steel appliances</li>
+                                        <li>Custom cabinetry</li>
+                                    </ul>
+                                </div>
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-building"></i> Building Amenities</h4>
+                                    <ul>
+                                        <li>24/7 concierge service</li>
+                                        <li>Fitness center</li>
+                                        <li>Swimming pool</li>
+                                        <li>Rooftop terrace</li>
+                                        <li>Underground parking</li>
+                                        <li>Security system</li>
+                                    </ul>
+                                </div>
+                                <div class="feature-category">
+                                    <h4><i class="fas fa-map-marker-alt"></i> Location Benefits</h4>
+                                    <ul>
+                                        <li>Downtown location</li>
+                                        <li>Public transportation</li>
+                                        <li>Shopping centers nearby</li>
+                                        <li>Restaurants and cafes</li>
+                                        <li>Parks and recreation</li>
+                                        <li>Schools and universities</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Info & Actions -->
+                    <div class="property-right-column">
+                        <!-- Quick Info Card -->
+                        <div class="quick-info-card">
+                            <h3>Quick Information</h3>
+                            
+                            <!-- Property Badges & Price Section -->
+                            <div class="property-badges-price-section">
+                                <div class="property-badges">
+                                    <span class="property-type-badge type-penthouse">Penthouse</span>
+                                    <span class="status-badge status-occupied">Occupied</span>
+                                    <span class="property-id-badge">#PROP001</span>
+                                </div>
+                                <div class="property-price-section">
+                                    <div class="price-main">
+                                        <span class="price-amount">$4,500</span>
+                                        <span class="price-period">/month</span>
+                                    </div>
+                                    <div class="price-details">
+                                        <span class="price-security">Security: $9,000</span>
+                                        <span class="price-utilities">Utilities: Included</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <i class="fas fa-bed"></i>
+                                    <div class="info-content">
+                                        <span class="info-label">Bedrooms</span>
+                                        <span class="info-value">3</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-bath"></i>
+                                    <div class="info-content">
+                                        <span class="info-label">Bathrooms</span>
+                                        <span class="info-value">2.5</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <div class="info-content">
+                                        <span class="info-label">Square Feet</span>
+                                        <span class="info-value">2,200</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-car"></i>
+                                    <div class="info-content">
+                                        <span class="info-label">Parking</span>
+                                        <span class="info-value">2 Spaces</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <div class="info-content">
+                                        <span class="info-label">Available</span>
+                                        <span class="info-value">Dec 1, 2024</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-tag"></i>
+                                    <div class="info-content">
+                                        <span class="info-label">Property Type</span>
+                                        <span class="info-value">Penthouse</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Contact Card -->
+                         <div class="contact-card">
+                          <h3>Contact Information</h3>
+                          <div class="contact-info">
+                              <div class="contact-item">
+                                  <i class="fas fa-user"></i>
+                                  <div class="contact-details">
+                                      <span class="contact-label">Property Manager</span>
+                                      <span class="contact-value">Sarah Johnson</span>
+                                  </div>
+                              </div>
+                              <div class="contact-item">
+                                  <i class="fas fa-phone"></i>
+                                  <div class="contact-details">
+                                      <span class="contact-label">Phone</span>
+                                      <span class="contact-value">+1 (555) 123-4567</span>
+                                  </div>
+                              </div>
+                              <div class="contact-item">
+                                  <i class="fas fa-envelope"></i>
+                                  <div class="contact-details">
+                                      <span class="contact-label">Email</span>
+                                      <span class="contact-value">sarah.j@company.com</span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="contact-actions">
+                              <button class="btn btn-primary btn-full" onclick="contactManager()">
+                                  <i class="fas fa-phone"></i>
+                                  Call Manager
+                              </button>
+                              <button class="btn btn-secondary btn-full" onclick="sendMessage()">
+                                  <i class="fas fa-envelope"></i>
+                                  Send Message
+                              </button>
+                          </div>
+                      </div>
+
+
+                        <!-- Property History -->
+                        <div class="property-history-section">
+                            <h3>Property History</h3>
+                            <div class="history-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Dec 2024</div>
+                                    <div class="timeline-content">
+                                        <h4>Property Listed</h4>
+                                        <p>Property became available for rent</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Nov 2024</div>
+                                    <div class="timeline-content">
+                                        <h4>Previous Tenant Moved Out</h4>
+                                        <p>Property vacated and prepared for new listing</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Oct 2024</div>
+                                    <div class="timeline-content">
+                                        <h4>Maintenance Completed</h4>
+                                        <p>Regular maintenance and updates performed</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Sep 2024</div>
+                                    <div class="timeline-content">
+                                        <h4>Property Acquired</h4>
+                                        <p>Property added to company portfolio</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Financial Details Card -->
+                        <div class="financial-card">
+                            <h3>Financial Details</h3>
+                            <div class="financial-info">
+                                <div class="financial-item">
+                                    <span class="financial-label">Monthly Rent</span>
+                                    <span class="financial-value">$4,500</span>
+                                </div>
+                                <div class="financial-item">
+                                    <span class="financial-label">Security Deposit</span>
+                                    <span class="financial-value">$9,000</span>
+                                </div>
+                                <div class="financial-item">
+                                    <span class="financial-label">Utilities</span>
+                                    <span class="financial-value">Included</span>
+                                </div>
+                                <div class="financial-item">
+                                    <span class="financial-label">Pet Fee</span>
+                                    <span class="financial-value">$300</span>
+                                </div>
+                                <div class="financial-item">
+                                    <span class="financial-label">Application Fee</span>
+                                    <span class="financial-value">$50</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Property Modal -->
+    <div id="editPropertyModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Edit Property</h2>
+                <button class="modal-close" id="closeEditModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editPropertyForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-property-name">Property Name</label>
+                            <input type="text" id="edit-property-name" name="propertyName" value="Luxury Penthouse A1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-property-type">Property Type</label>
+                            <select id="edit-property-type" name="propertyType" required>
+                                <option value="apartment">Apartment</option>
+                                <option value="studio">Studio</option>
+                                <option value="penthouse" selected>Penthouse</option>
+                                <option value="loft">Loft</option>
+                                <option value="duplex">Duplex</option>
+                                <option value="house">House</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-property-address">Address</label>
+                            <input type="text" id="edit-property-address" name="address" value="123 Luxury Avenue, Downtown" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-property-city">City</label>
+                            <input type="text" id="edit-property-city" name="city" value="New York" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-property-price">Monthly Rent</label>
+                            <input type="number" id="edit-property-price" name="monthlyRent" value="4500" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-property-status">Status</label>
+                            <select id="edit-property-status" name="status" required>
+                                <option value="available">Available</option>
+                                <option value="occupied" selected>Occupied</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="reserved">Reserved</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-property-description">Description</label>
+                        <textarea id="edit-property-description" name="description" rows="4" required>This stunning luxury penthouse offers the perfect blend of elegance and comfort...</textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+                <button type="submit" form="editPropertyForm" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Viewing Modal -->
+    <div id="bookViewingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book Property Viewing</h2>
+                <button class="modal-close" id="closeBookModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="bookViewingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="viewing-name">Full Name</label>
+                            <input type="text" id="viewing-name" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="viewing-phone">Phone Number</label>
+                            <input type="tel" id="viewing-phone" name="phone" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="viewing-email">Email</label>
+                            <input type="email" id="viewing-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="viewing-date">Preferred Date</label>
+                            <input type="date" id="viewing-date" name="preferredDate" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="viewing-time">Preferred Time</label>
+                            <select id="viewing-time" name="preferredTime" required>
+                                <option value="">Select Time</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="viewing-notes">Additional Notes</label>
+                            <textarea id="viewing-notes" name="notes" rows="3" placeholder="Any special requirements or questions..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelBookBtn">Cancel</button>
+                <button type="submit" form="bookViewingForm" class="btn btn-primary">Book Viewing</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/component-loader.js"></script>
+    <script src="../js/language-manager.js"></script>
+    <script src="../js/translation-utils.js"></script>
+    <script>
+        // Property images array
+        const propertyImages = [
+            'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=500&fit=crop'
+        ];
+        
+        let currentImageIndex = 0;
+
+        // Initialize property detail page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Property detail page DOM loaded');
+            
+            try {
+                // Load sidebar component with full functionality
+                await window.componentLoader.loadSidebarWithFunctionality('.sidebar-container');
+                
+                // Initialize language manager
+                const languageManager = new LanguageManager();
+                
+                // Wait for language manager to be ready
+                while (!languageManager.initialized) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                // Set up page header language selector
+                setupPageHeaderLanguageSelector();
+                
+                console.log('Property detail page initialized successfully');
+                
+                // Initialize modals
+                initializeModals();
+                
+                // Set current date for viewing form
+                document.getElementById('viewing-date').value = new Date().toISOString().split('T')[0];
+                
+            } catch (error) {
+                console.error('Failed to initialize property detail page:', error);
+            }
+        });
+
+        // Initialize modals
+        function initializeModals() {
+            // Edit Property Modal
+            const editModal = document.getElementById('editPropertyModal');
+            const editBtn = document.getElementById('edit-property-btn');
+            const closeEditBtn = document.getElementById('closeEditModal');
+            const cancelEditBtn = document.getElementById('cancelEditBtn');
+            const editForm = document.getElementById('editPropertyForm');
+
+            // Book Viewing Modal
+            const bookModal = document.getElementById('bookViewingModal');
+            const bookBtn = document.getElementById('book-property-btn');
+            const closeBookBtn = document.getElementById('closeBookModal');
+            const cancelBookBtn = document.getElementById('cancelBookBtn');
+            const bookForm = document.getElementById('bookViewingForm');
+
+            // Edit Property Modal Events
+            editBtn.addEventListener('click', () => {
+                editModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeEditBtn.addEventListener('click', closeEditModal);
+            cancelEditBtn.addEventListener('click', closeEditModal);
+
+            // Book Viewing Modal Events
+            bookBtn.addEventListener('click', () => {
+                bookModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeBookBtn.addEventListener('click', closeBookModal);
+            cancelBookBtn.addEventListener('click', closeBookModal);
+
+            // Close modals when clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === editModal) {
+                    closeEditModal();
+                }
+                if (event.target === bookModal) {
+                    closeBookModal();
+                }
+            });
+
+            // Form submissions
+            editForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                savePropertyChanges();
+                closeEditModal();
+            });
+
+            bookForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                bookPropertyViewing();
+                closeBookModal();
+            });
+        }
+
+        // Close edit modal
+        function closeEditModal() {
+            document.getElementById('editPropertyModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close book viewing modal
+        function closeBookModal() {
+            document.getElementById('bookViewingModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('bookViewingForm').reset();
+            document.getElementById('viewing-date').value = new Date().toISOString().split('T')[0];
+        }
+
+        // Save property changes
+        function savePropertyChanges() {
+            const formData = new FormData(document.getElementById('editPropertyForm'));
+            const propertyData = Object.fromEntries(formData.entries());
+            
+            console.log('Saving property changes:', propertyData);
+            // Here you would typically send the data to your backend
+            
+            alert('Property updated successfully!');
+        }
+
+        // Book property viewing
+        function bookPropertyViewing() {
+            const formData = new FormData(document.getElementById('bookViewingForm'));
+            const viewingData = Object.fromEntries(formData.entries());
+            
+            console.log('Booking property viewing:', viewingData);
+            // Here you would typically send the data to your backend
+            
+            alert('Viewing booked successfully! We will contact you to confirm.');
+        }
+
+        // Image navigation functions
+        function changeImage(direction) {
+            currentImageIndex = (currentImageIndex + direction + propertyImages.length) % propertyImages.length;
+            updateMainImage();
+            updateThumbnails();
+        }
+
+        function selectImage(index) {
+            currentImageIndex = index;
+            updateMainImage();
+            updateThumbnails();
+        }
+
+        function updateMainImage() {
+            const mainImage = document.getElementById('main-property-image');
+            mainImage.src = propertyImages[currentImageIndex];
+        }
+
+        function updateThumbnails() {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, index) => {
+                thumb.classList.toggle('active', index === currentImageIndex);
+            });
+        }
+
+        // Contact functions
+        function contactManager() {
+            window.open('tel:+15551234567', '_self');
+        }
+
+        function sendMessage() {
+            const subject = encodeURIComponent('Inquiry about Luxury Penthouse A1');
+            const body = encodeURIComponent('Hello, I am interested in learning more about this property. Please contact me.');
+            window.open(`mailto:sarah.j@company.com?subject=${subject}&body=${body}`, '_self');
+        }
+
+        // Set up page header language selector
+        function setupPageHeaderLanguageSelector() {
+            const languageSelector = document.querySelector('.page-header .language-selector');
+            if (languageSelector) {
+                const currentLang = document.documentElement.lang || 'en';
+                languageSelector.value = currentLang;
+                
+                languageSelector.addEventListener('change', (e) => {
+                    const newLang = e.target.value;
+                    if (window.languageManager) {
+                        window.languageManager.setLanguage(newLang);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

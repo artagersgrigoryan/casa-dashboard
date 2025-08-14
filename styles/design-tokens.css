@@ -1,0 +1,295 @@
+/* ========================================
+   DESIGN TOKENS - CSS Custom Properties
+   ======================================== */
+
+:root {
+  /* ========================================
+     BASE COLOR PALETTE
+     ======================================== */
+  
+  /* Primary Colors */
+  --primary-color: #4361ee;
+  --primary-light: #e6e9f9;
+  --secondary-color: #3f37c9;
+  --accent-color: #4cc9f0;
+  
+  /* Core Colors */
+  --dark-color: #1a1a2e;
+  --light-color: #f8f9fa;
+  
+  /* Semantic Colors */
+  --success-color: #4ade80;
+  --warning-color: #fbbf24;
+  --danger-color: #f87171;
+  
+  /* Neutral Colors */
+  --gray-color: #6b7280;
+  --gray-light: #e5e7eb;
+  
+  /* ========================================
+     LAYOUT CONSTANTS
+     ======================================== */
+  --sidebar-width: 260px;
+  --header-height: 80px;
+  --border-radius: 8px;
+  
+  /* ========================================
+     SHADOWS & EFFECTS
+     ======================================== */
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --box-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* ========================================
+     TRANSITIONS
+     ======================================== */
+  --transition: all 0.3s ease;
+  
+  /* ========================================
+     EXTENDED COLOR SCALES (for backward compatibility)
+     ======================================== */
+  
+  /* Primary Color Scale */
+  --primary-50: #e6e9f9;
+  --primary-100: #c7d1f0;
+  --primary-200: #a3b3e6;
+  --primary-300: #7f95dc;
+  --primary-400: #5b77d2;
+  --primary-500: #4361ee;
+  --primary-600: #3a56d4;
+  --primary-700: #314bba;
+  --primary-800: #2840a0;
+  --primary-900: #1f3586;
+  --primary-950: #162a6c;
+  
+  /* Secondary Color Scale */
+  --secondary-50: #e6e7f9;
+  --secondary-100: #c7c9f0;
+  --secondary-200: #a3a7e6;
+  --secondary-300: #7f85dc;
+  --secondary-400: #5b63d2;
+  --secondary-500: #3f37c9;
+  --secondary-600: #3630b0;
+  --secondary-700: #2d2997;
+  --secondary-800: #24227e;
+  --secondary-900: #1b1b65;
+  --secondary-950: #12144c;
+  
+  /* Accent Color Scale */
+  --accent-50: #e6f7fc;
+  --accent-100: #c7edf8;
+  --accent-200: #a3e1f4;
+  --accent-300: #7fd5f0;
+  --accent-400: #5bc9ec;
+  --accent-500: #4cc9f0;
+  --accent-600: #42b0d6;
+  --accent-700: #3897bc;
+  --accent-800: #2e7ea2;
+  --accent-900: #246588;
+  --accent-950: #1a4c6e;
+  
+  /* Success Color Scale */
+  --success-50: #f0fdf4;
+  --success-100: #dcfce7;
+  --success-200: #bbf7d0;
+  --success-300: #86efac;
+  --success-400: #4ade80;
+  --success-500: #22c55e;
+  --success-600: #16a34a;
+  --success-700: #15803d;
+  --success-800: #166534;
+  --success-900: #14532d;
+  --success-950: #052e16;
+  
+  /* Warning Color Scale */
+  --warning-50: #fffbeb;
+  --warning-100: #fef3c7;
+  --warning-200: #fde68a;
+  --warning-300: #fcd34d;
+  --warning-400: #fbbf24;
+  --warning-500: #f59e0b;
+  --warning-600: #d97706;
+  --warning-700: #b45309;
+  --warning-800: #92400e;
+  --warning-900: #78350f;
+  --warning-950: #451a03;
+  
+  /* Danger Color Scale */
+  --danger-50: #fef2f2;
+  --danger-100: #fee2e2;
+  --danger-200: #fecaca;
+  --danger-300: #fca5a5;
+  --danger-400: #f87171;
+  --danger-500: #ef4444;
+  --danger-600: #dc2626;
+  --danger-700: #b91c1c;
+  --danger-800: #991b1b;
+  --danger-900: #7f1d1d;
+  --danger-950: #450a0a;
+  
+  /* Gray Color Scale */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --gray-950: #030712;
+  
+  /* ========================================
+     SPACING SCALE
+     ======================================== */
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+  
+  /* ========================================
+     TYPOGRAPHY SCALE
+     ======================================== */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  --font-size-6xl: 3.75rem;   /* 60px */
+  
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
+  --radius-none: 0;
+  --radius-sm: 0.125rem;   /* 2px */
+  --radius-base: 0.25rem;  /* 4px */
+  --radius-md: 0.375rem;   /* 6px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius-xl: 0.75rem;    /* 12px */
+  --radius-2xl: 1rem;      /* 16px */
+  --radius-3xl: 1.5rem;    /* 24px */
+  --radius-full: 9999px;
+  
+  /* ========================================
+     SHADOWS
+     ======================================== */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  
+  /* ========================================
+     TRANSITIONS
+     ======================================== */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+  --transition-slower: 700ms ease;
+  
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* ========================================
+     Z-INDEX SCALE
+     ======================================== */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+  
+  /* ========================================
+     COMPONENT SPECIFIC TOKENS
+     ======================================== */
+  --card-padding: 1.5rem;
+  --card-border-radius: var(--border-radius);
+  --button-padding-x: 1rem;
+  --button-padding-y: 0.75rem;
+  --input-padding-x: 1rem;
+  --input-padding-y: 0.5rem;
+  
+  /* ========================================
+     THEME MAPPING (for backward compatibility)
+     ======================================== */
+  --bg-primary: var(--light-color);
+  --bg-secondary: white;
+  --bg-sidebar: white;
+  --bg-card: white;
+  --bg-overlay: rgba(0, 0, 0, 0.1);
+  
+  --text-primary: var(--dark-color);
+  --text-secondary: var(--gray-color);
+  --text-muted: var(--gray-color);
+  --text-inverse: white;
+  
+  --border-primary: var(--gray-light);
+  --border-secondary: var(--gray-light);
+  --border-accent: var(--primary-light);
+  
+  --shadow-primary: var(--box-shadow);
+  --shadow-secondary: var(--box-shadow-hover);
+  --shadow-elevated: var(--shadow-lg);
+  
+  /* ========================================
+     DARK MODE ENHANCED COLORS
+     ======================================== */
+  --dark-primary: #60a5fa;
+  --dark-primary-light: rgba(96, 165, 250, 0.15);
+  --dark-secondary: #818cf8;
+  --dark-accent: #22d3ee;
+  
+  --dark-bg-primary: #0f0f23;
+  --dark-bg-secondary: #1a1a2e;
+  --dark-bg-sidebar: #1a1a2e;
+  --dark-bg-card: #1a1a2e;
+  
+  --dark-text-primary: #ffffff;
+  --dark-text-secondary: #e2e8f0;
+  --dark-text-muted: #94a3b8;
+  
+  --dark-border-primary: #334155;
+  --dark-border-secondary: #475569;
+  
+  --dark-success: #4ade80;
+  --dark-warning: #fbbf24;
+  --dark-danger: #f87171;
+  
+  --dark-gray: #cbd5e1;
+  --dark-gray-light: #475569;
+}

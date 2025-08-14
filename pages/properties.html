@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties - Property Management Dashboard</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Container -->
+        <div class="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mobile Sidebar Toggle -->
+            <button class="mobile-sidebar-toggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-center">
+                    <h1 class="page-title">Properties</h1>
+                </div>
+                <div class="header-right">
+                    <!-- Language Selector -->
+                    <select id="languageSelector" class="language-selector">
+                        <option value="en">English</option>
+                        <option value="hy">Հայերեն</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                    <!-- Add Property Button -->
+                    <button class="btn btn-primary" id="add-property-btn">
+                        <i class="fas fa-plus"></i>
+                        Add Property
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content-wrapper">
+                <!-- Filters Section -->
+                <div class="filters-section">
+                    <div class="filters-row">
+                        <div class="filter-group">
+                            <label for="property-type-filter">Property Type</label>
+                            <select id="property-type-filter" class="filter-select">
+                                <option value="">All Types</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="studio">Studio</option>
+                                <option value="penthouse">Penthouse</option>
+                                <option value="loft">Loft</option>
+                                <option value="duplex">Duplex</option>
+                                <option value="house">House</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="status-filter">Status</label>
+                            <select id="status-filter" class="filter-select">
+                                <option value="">All Statuses</option>
+                                <option value="available">Available</option>
+                                <option value="occupied">Occupied</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="reserved">Reserved</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="price-range-filter">Price Range</label>
+                            <select id="price-range-filter" class="filter-select">
+                                <option value="">All Prices</option>
+                                <option value="0-1000">$0 - $1,000</option>
+                                <option value="1000-2000">$1,000 - $2,000</option>
+                                <option value="2000-3000">$2,000 - $3,000</option>
+                                <option value="3000-5000">$3,000 - $5,000</option>
+                                <option value="5000+">$5,000+</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="bedrooms-filter">Bedrooms</label>
+                            <select id="bedrooms-filter" class="filter-select">
+                                <option value="">Any</option>
+                                <option value="0">Studio</option>
+                                <option value="1">1 Bedroom</option>
+                                <option value="2">2 Bedrooms</option>
+                                <option value="3">3 Bedrooms</option>
+                                <option value="4+">4+ Bedrooms</option>
+                            </select>
+                        </div>
+                        <div class="filter-actions">
+                            <button class="btn btn-secondary" id="clear-filters">
+                                <i class="fas fa-times"></i>
+                                Clear Filters
+                            </button>
+                            <button class="btn btn-primary" id="apply-filters">
+                                <i class="fas fa-search"></i>
+                                Apply Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Properties Cards Grid -->
+                <div class="properties-grid">
+                    <!-- Property Card 1 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=250&fit=crop" alt="Luxury Penthouse A1">
+                            <div class="property-overlay">
+                                <span class="property-type-badge type-penthouse">Penthouse</span>
+                                <span class="status-badge status-occupied">Occupied</span>
+                            </div>
+                        </div>
+                        <div class="property-card-content">
+                            <div class="property-card-header">
+                                <div class="property-main-info">
+                                    <h3 class="property-name">Luxury Penthouse A1</h3>
+                                    <span class="property-id">#PROP001</span>
+                                </div>
+                                <div class="property-price">
+                                    <span class="price-amount">$4,500</span>
+                                    <span class="price-period">/month</span>
+                                </div>
+                            </div>
+                            <div class="property-card-body">
+                                <div class="property-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>123 Luxury Ave, Downtown</span>
+                                </div>
+                                <div class="property-specs">
+                                    <div class="spec-item">
+                                        <i class="fas fa-bed"></i>
+                                        <span>3 Bedrooms</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-bath"></i>
+                                        <span>2.5 Bathrooms</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>2,200 sq ft</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-car"></i>
+                                        <span>2 Parking</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-card-footer">
+                                <div class="property-amenities">
+                                    <span class="amenity-tag">Balcony</span>
+                                    <span class="amenity-tag">Gym</span>
+                                    <span class="amenity-tag">Pool</span>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-secondary edit-property" data-id="1" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <a href="property-detail.html" class="btn btn-sm btn-primary view-property" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-accent delete-property" data-id="1" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property Card 2 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=250&fit=crop" alt="Modern Studio B3">
+                            <div class="property-overlay">
+                                <span class="property-type-badge type-studio">Studio</span>
+                                <span class="status-badge status-available">Available</span>
+                            </div>
+                        </div>
+                        <div class="property-card-content">
+                            <div class="property-card-header">
+                                <div class="property-main-info">
+                                    <h3 class="property-name">Modern Studio B3</h3>
+                                    <span class="property-id">#PROP002</span>
+                                </div>
+                                <div class="property-price">
+                                    <span class="price-amount">$1,800</span>
+                                    <span class="price-period">/month</span>
+                                </div>
+                            </div>
+                            <div class="property-card-body">
+                                <div class="property-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>456 Modern St, Midtown</span>
+                                </div>
+                                <div class="property-specs">
+                                    <div class="spec-item">
+                                        <i class="fas fa-bed"></i>
+                                        <span>Studio</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-bath"></i>
+                                        <span>1 Bathroom</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>650 sq ft</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-car"></i>
+                                        <span>1 Parking</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-card-footer">
+                                <div class="property-amenities">
+                                    <span class="amenity-tag">Balcony</span>
+                                    <span class="amenity-tag">Gym</span>
+                                    <span class="amenity-tag">Laundry</span>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-secondary edit-property" data-id="2" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <a href="property-detail.html" class="btn btn-sm btn-primary view-property" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-accent delete-property" data-id="2" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property Card 3 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=250&fit=crop" alt="Executive Suite C2">
+                            <div class="property-overlay">
+                                <span class="property-type-badge type-apartment">Apartment</span>
+                                <span class="status-badge status-maintenance">Maintenance</span>
+                            </div>
+                        </div>
+                        <div class="property-card-content">
+                            <div class="property-card-header">
+                                <div class="property-main-info">
+                                    <h3 class="property-name">Executive Suite C2</h3>
+                                    <span class="property-id">#PROP003</span>
+                                </div>
+                                <div class="property-price">
+                                    <span class="price-amount">$3,200</span>
+                                    <span class="price-period">/month</span>
+                                </div>
+                            </div>
+                            <div class="property-card-body">
+                                <div class="property-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>789 Executive Blvd, Uptown</span>
+                                </div>
+                                <div class="property-specs">
+                                    <div class="spec-item">
+                                        <i class="fas fa-bed"></i>
+                                        <span>2 Bedrooms</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-bath"></i>
+                                        <span>2 Bathrooms</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>1,450 sq ft</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-car"></i>
+                                        <span>1 Parking</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-card-footer">
+                                <div class="property-amenities">
+                                    <span class="amenity-tag">Balcony</span>
+                                    <span class="amenity-tag">Elevator</span>
+                                    <span class="amenity-tag">Parking</span>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-secondary edit-property" data-id="3" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <a href="property-detail.html" class="btn btn-sm btn-primary view-property" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-accent delete-property" data-id="3" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property Card 4 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=250&fit=crop" alt="Premium Loft D1">
+                            <div class="property-overlay">
+                                <span class="property-type-badge type-loft">Loft</span>
+                                <span class="status-badge status-occupied">Occupied</span>
+                            </div>
+                        </div>
+                        <div class="property-card-content">
+                            <div class="property-card-header">
+                                <div class="property-main-info">
+                                    <h3 class="property-name">Premium Loft D1</h3>
+                                    <span class="property-id">#PROP004</span>
+                                </div>
+                                <div class="property-price">
+                                    <span class="price-amount">$2,800</span>
+                                    <span class="price-period">/month</span>
+                                </div>
+                            </div>
+                            <div class="property-card-body">
+                                <div class="property-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>321 Loft Lane, Arts District</span>
+                                </div>
+                                <div class="property-specs">
+                                    <div class="spec-item">
+                                        <i class="fas fa-bed"></i>
+                                        <span>1 Bedroom</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-bath"></i>
+                                        <span>1.5 Bathrooms</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>1,100 sq ft</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-car"></i>
+                                        <span>1 Parking</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-card-footer">
+                                <div class="property-amenities">
+                                    <span class="amenity-tag">High Ceilings</span>
+                                    <span class="amenity-tag">Exposed Brick</span>
+                                    <span class="amenity-tag">Balcony</span>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-secondary edit-property" data-id="4" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <a href="property-detail.html" class="btn btn-sm btn-primary view-property" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-accent delete-property" data-id="4" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property Card 5 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&h=250&fit=crop" alt="Deluxe Apartment E4">
+                            <div class="property-overlay">
+                                <span class="property-type-badge type-apartment">Apartment</span>
+                                <span class="status-badge status-available">Available</span>
+                            </div>
+                        </div>
+                        <div class="property-card-content">
+                            <div class="property-card-header">
+                                <div class="property-main-info">
+                                    <h3 class="property-name">Deluxe Apartment E4</h3>
+                                    <span class="property-id">#PROP005</span>
+                                </div>
+                                <div class="property-price">
+                                    <span class="price-amount">$2,500</span>
+                                    <span class="price-period">/month</span>
+                                </div>
+                            </div>
+                            <div class="property-card-body">
+                                <div class="property-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>654 Deluxe Dr, Suburbs</span>
+                                </div>
+                                <div class="property-specs">
+                                    <div class="spec-item">
+                                        <i class="fas fa-bed"></i>
+                                        <span>2 Bedrooms</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-bath"></i>
+                                        <span>2 Bathrooms</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>1,200 sq ft</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-car"></i>
+                                        <span>2 Parking</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-card-footer">
+                                <div class="property-amenities">
+                                    <span class="amenity-tag">Balcony</span>
+                                    <span class="amenity-tag">Garden</span>
+                                    <span class="amenity-tag">Storage</span>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-secondary edit-property" data-id="5" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <a href="property-detail.html" class="btn btn-sm btn-primary view-property" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-accent delete-property" data-id="5" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property Card 6 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=250&fit=crop" alt="Family House F2">
+                            <div class="property-overlay">
+                                <span class="property-type-badge type-house">House</span>
+                                <span class="status-badge status-reserved">Reserved</span>
+                            </div>
+                        </div>
+                        <div class="property-card-content">
+                            <div class="property-card-header">
+                                <div class="property-main-info">
+                                    <h3 class="property-name">Family House F2</h3>
+                                    <span class="property-id">#PROP006</span>
+                                </div>
+                                <div class="property-price">
+                                    <span class="price-amount">$5,200</span>
+                                    <span class="price-period">/month</span>
+                                </div>
+                            </div>
+                            <div class="property-card-body">
+                                <div class="property-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>987 Family Way, Residential</span>
+                                </div>
+                                <div class="property-specs">
+                                    <div class="spec-item">
+                                        <i class="fas fa-bed"></i>
+                                        <span>4 Bedrooms</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-bath"></i>
+                                        <span>3 Bathrooms</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>3,200 sq ft</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-car"></i>
+                                        <span>3 Parking</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-card-footer">
+                                <div class="property-amenities">
+                                    <span class="amenity-tag">Garden</span>
+                                    <span class="amenity-tag">Garage</span>
+                                    <span class="amenity-tag">Fireplace</span>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-secondary edit-property" data-id="6" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <a href="property-detail.html" class="btn btn-sm btn-primary view-property" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-accent delete-property" data-id="6" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Property Modal -->
+    <div id="addPropertyModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Add New Property</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addPropertyForm">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3>Basic Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="propertyName">Property Name *</label>
+                                <input type="text" id="propertyName" name="propertyName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="propertyType">Property Type *</label>
+                                <select id="propertyType" name="propertyType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="apartment">Apartment</option>
+                                    <option value="studio">Studio</option>
+                                    <option value="penthouse">Penthouse</option>
+                                    <option value="loft">Loft</option>
+                                    <option value="duplex">Duplex</option>
+                                    <option value="house">House</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address">Address *</label>
+                                <input type="text" id="address" name="address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="state">State/Province *</label>
+                                <input type="text" id="state" name="state" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zipCode">ZIP/Postal Code *</label>
+                                <input type="text" id="zipCode" name="zipCode" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="country">Country *</label>
+                                <input type="text" id="country" name="country" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="floor">Floor</label>
+                                <input type="number" id="floor" name="floor" min="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property Details -->
+                    <div class="form-section">
+                        <h3>Property Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bedrooms">Bedrooms *</label>
+                                <input type="number" id="bedrooms" name="bedrooms" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bathrooms">Bathrooms *</label>
+                                <input type="number" id="bathrooms" name="bathrooms" min="0" step="0.5" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="squareFootage">Square Footage</label>
+                                <input type="number" id="squareFootage" name="squareFootage" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="parkingSpaces">Parking Spaces</label>
+                                <input type="number" id="parkingSpaces" name="parkingSpaces" min="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="yearBuilt">Year Built</label>
+                                <input type="number" id="yearBuilt" name="yearBuilt" min="1800" max="2030">
+                            </div>
+                            <div class="form-group">
+                                <label for="condition">Condition</label>
+                                <select id="condition" name="condition">
+                                    <option value="">Select Condition</option>
+                                    <option value="excellent">Excellent</option>
+                                    <option value="good">Good</option>
+                                    <option value="fair">Fair</option>
+                                    <option value="needs_repair">Needs Repair</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Information -->
+                    <div class="form-section">
+                        <h3>Financial Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="monthlyRent">Monthly Rent *</label>
+                                <input type="number" id="monthlyRent" name="monthlyRent" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="securityDeposit">Security Deposit</label>
+                                <input type="number" id="securityDeposit" name="securityDeposit" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="utilitiesIncluded">Utilities Included</label>
+                                <select id="utilitiesIncluded" name="utilitiesIncluded">
+                                    <option value="">Select Option</option>
+                                    <option value="none">None</option>
+                                    <option value="water">Water</option>
+                                    <option value="electricity">Electricity</option>
+                                    <option value="gas">Gas</option>
+                                    <option value="internet">Internet</option>
+                                    <option value="all">All Utilities</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="petPolicy">Pet Policy</label>
+                                <select id="petPolicy" name="petPolicy">
+                                    <option value="">Select Policy</option>
+                                    <option value="no_pets">No Pets</option>
+                                    <option value="cats_only">Cats Only</option>
+                                    <option value="dogs_only">Dogs Only</option>
+                                    <option value="pets_allowed">Pets Allowed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Amenities -->
+                    <div class="form-section">
+                        <h3>Amenities</h3>
+                        <div class="amenities-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="air_conditioning">
+                                <span>Air Conditioning</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="heating">
+                                <span>Heating</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="balcony">
+                                <span>Balcony</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="elevator">
+                                <span>Elevator</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="gym">
+                                <span>Gym</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="pool">
+                                <span>Pool</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="parking">
+                                <span>Parking</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="amenities" value="laundry">
+                                <span>Laundry</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-section">
+                        <h3>Description</h3>
+                        <div class="form-group">
+                            <label for="description">Property Description</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Describe the property, its features, and any special notes..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Photos -->
+                    <div class="form-section">
+                        <h3>Photos</h3>
+                        <div class="form-group">
+                            <label for="photos">Upload Photos</label>
+                            <input type="file" id="photos" name="photos" multiple accept="image/*">
+                            <small>You can select multiple photos. Supported formats: JPG, PNG, GIF</small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button type="submit" form="addPropertyForm" class="btn btn-primary">Add Property</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/component-loader.js"></script>
+    <script src="../js/language-manager.js"></script>
+    <script src="../js/translation-utils.js"></script>
+    <script>
+        // Initialize properties page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Properties page DOM loaded');
+            
+            try {
+                // Load sidebar component with full functionality
+                await window.componentLoader.loadSidebarWithFunctionality('.sidebar-container');
+                
+                // Initialize language manager
+                const languageManager = new LanguageManager();
+                
+                // Wait for language manager to be ready
+                while (!languageManager.initialized) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                // Set up page header language selector
+                setupPageHeaderLanguageSelector();
+                
+                console.log('Properties page initialized successfully');
+                
+                // Initialize modal functionality
+                initializeModal();
+                
+                // Initialize filters
+                initializeFilters();
+                
+            } catch (error) {
+                console.error('Failed to initialize properties page:', error);
+            }
+        });
+        
+        // Modal functionality
+        function initializeModal() {
+            const modal = document.getElementById('addPropertyModal');
+            const addBtn = document.getElementById('add-property-btn');
+            const closeBtn = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const form = document.getElementById('addPropertyForm');
+            
+            // Open modal
+            addBtn.addEventListener('click', function() {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close modal
+            function closeModal() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                form.reset();
+            }
+            
+            closeBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would typically send the data to your backend
+                console.log('Form submitted:', new FormData(form));
+                alert('Property added successfully!');
+                closeModal();
+            });
+        }
+
+        // Initialize filters
+        function initializeFilters() {
+            const clearFiltersBtn = document.getElementById('clear-filters');
+            const applyFiltersBtn = document.getElementById('apply-filters');
+            
+            // Clear filters
+            clearFiltersBtn.addEventListener('click', function() {
+                document.getElementById('property-type-filter').value = '';
+                document.getElementById('status-filter').value = '';
+                document.getElementById('price-range-filter').value = '';
+                document.getElementById('bedrooms-filter').value = '';
+            });
+            
+            // Apply filters
+            applyFiltersBtn.addEventListener('click', function() {
+                const filters = {
+                    type: document.getElementById('property-type-filter').value,
+                    status: document.getElementById('status-filter').value,
+                    priceRange: document.getElementById('price-range-filter').value,
+                    bedrooms: document.getElementById('bedrooms-filter').value
+                };
+                
+                console.log('Applying filters:', filters);
+                // Here you would typically filter the table data
+                // For now, just log the filters
+            });
+        }
+
+        // Set up page header language selector
+        function setupPageHeaderLanguageSelector() {
+            const languageSelector = document.querySelector('.page-header .language-selector');
+            if (languageSelector) {
+                const currentLang = document.documentElement.lang || 'en';
+                languageSelector.value = currentLang;
+                
+                languageSelector.addEventListener('change', (e) => {
+                    const newLang = e.target.value;
+                    if (window.languageManager) {
+                        window.languageManager.setLanguage(newLang);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

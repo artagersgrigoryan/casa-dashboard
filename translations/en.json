@@ -1,0 +1,154 @@
+{
+  "nav": {
+    "title": "Property Management",
+    "dashboard": "Dashboard",
+    "customers": "Customers",
+    "properties": "Properties",
+    "employees": "Employees",
+    "finances": "Finances",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Welcome! Here's what's happening with your property:",
+    "theme": "Theme"
+  },
+  "stats": {
+    "totalProperty": "Total Property",
+    "occupiedApartments": "Occupied Apartments",
+    "monthlyIncome": "Monthly Income",
+    "maintenanceRequests": "Maintenance Requests"
+  },
+  "content": {
+    "recentProperties": "Recent Properties",
+    "recentActivity": "Recent Activity",
+    "propertyStatus": {
+      "occupied": "Occupied",
+      "available": "Available",
+      "maintenance": "Maintenance"
+    }
+  },
+  "activity": {
+    "newTenant": "New tenant moved into A1 apartment",
+    "maintenanceRequest": "Maintenance request for C2 apartment",
+    "rentPayment": "Rent received from B3 apartment",
+    "inspectionCompleted": "Property inspection completed",
+    "listingPublished": "New property listing published"
+  },
+  "time": {
+    "hoursAgo": "hours ago",
+    "daysAgo": "days ago"
+  },
+  "properties": {
+    "luxuryPenthouse": "Luxury Penthouse A1",
+    "modernStudio": "Modern Studio B3",
+    "executiveSuite": "Executive Suite C2",
+    "premiumLoft": "Premium Loft D1",
+    "deluxeApartment": "Deluxe Apartment E4"
+  },
+  "addApartment": {
+    "title": "Add New Apartment",
+    "basicInfo": "Basic Information",
+    "propertyName": "Property Name",
+    "propertyType": "Property Type",
+    "selectType": "Select Type",
+    "apartment": "Apartment",
+    "studio": "Studio",
+    "penthouse": "Penthouse",
+    "loft": "Loft",
+    "duplex": "Duplex",
+    "address": "Address",
+    "city": "City",
+    "state": "State/Province",
+    "zipCode": "ZIP/Postal Code",
+    "country": "Country",
+    "floor": "Floor",
+    "propertyDetails": "Property Details",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "squareFootage": "Square Footage",
+    "parkingSpaces": "Parking Spaces",
+    "yearBuilt": "Year Built",
+    "condition": "Condition",
+    "selectCondition": "Select Condition",
+    "excellent": "Excellent",
+    "good": "Good",
+    "fair": "Fair",
+    "needsRepair": "Needs Repair",
+    "financialInfo": "Financial Information",
+    "monthlyRent": "Monthly Rent",
+    "securityDeposit": "Security Deposit",
+    "utilitiesIncluded": "Utilities Included",
+    "selectOption": "Select Option",
+    "none": "None",
+    "water": "Water",
+    "electricity": "Electricity",
+    "gas": "Gas",
+    "internet": "Internet",
+    "allUtilities": "All Utilities",
+    "petPolicy": "Pet Policy",
+    "selectPolicy": "Select Policy",
+    "noPets": "No Pets",
+    "catsOnly": "Cats Only",
+    "dogsOnly": "Dogs Only",
+    "petsAllowed": "Pets Allowed",
+    "amenities": "Amenities",
+    "airConditioning": "Air Conditioning",
+    "heating": "Heating",
+    "balcony": "Balcony",
+    "elevator": "Elevator",
+    "gym": "Gym",
+    "pool": "Pool",
+    "parking": "Parking",
+    "laundry": "Laundry",
+    "description": "Description",
+    "propertyDescription": "Property Description",
+    "descriptionPlaceholder": "Describe the property, its features, and any special notes...",
+    "photos": "Photos",
+    "uploadPhotos": "Upload Photos",
+    "photosHelp": "You can select multiple photos. Supported formats: JPG, PNG, GIF",
+    "addApartment": "Add Apartment",
+    "cancel": "Cancel"
+  },
+  "user": {
+    "name": "Admin User",
+    "role": "Administrator"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your dashboard preferences and settings",
+    "language": {
+      "title": "Language",
+      "description": "Choose your preferred language for the dashboard interface"
+    },
+    "theme": {
+      "title": "Theme",
+      "description": "Choose your preferred visual theme for the dashboard",
+      "light": "Light Theme",
+      "lightDesc": "Clean and bright interface",
+      "dark": "Dark Theme",
+      "darkDesc": "Modern dark interface"
+    }
+  },
+  "common": {
+    "required": "Required",
+    "loading": "Loading...",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "close": "Close",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "refresh": "Refresh",
+    "export": "Export",
+    "import": "Import",
+    "download": "Download",
+    "upload": "Upload"
+  }
+}

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers - Property Management Dashboard</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Container -->
+        <div class="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mobile Sidebar Toggle -->
+            <button class="mobile-sidebar-toggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-center">
+                    <h1 class="page-title">Customers</h1>
+                </div>
+                <div class="header-right">
+                    <!-- Language Selector -->
+                    <select id="languageSelector" class="language-selector">
+                        <option value="en">English</option>
+                        <option value="hy">Հայերեն</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                    <!-- Add Customer Button -->
+                    <button class="btn btn-primary" id="add-customer-btn">
+                        <i class="fas fa-plus"></i>
+                        Add Customer
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content-wrapper">
+                <!-- Filters Section -->
+                <div class="filters-section">
+                    <div class="filters-row">
+                        <div class="filter-group">
+                            <label for="date-range">Date Range</label>
+                            <input type="text" id="date-range" class="filter-input" placeholder="Select date range">
+                        </div>
+                        <div class="filter-group">
+                            <label for="phone-filter">Phone Number</label>
+                            <input type="text" id="phone-filter" class="filter-input" placeholder="Enter phone number">
+                        </div>
+                        <div class="filter-group">
+                            <label for="status-filter">Status</label>
+                            <select id="status-filter" class="filter-select">
+                                <option value="">All Statuses</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+                        <div class="filter-actions">
+                            <button class="btn btn-secondary" id="clear-filters">
+                                <i class="fas fa-times"></i>
+                                Clear Filters
+                            </button>
+                            <button class="btn btn-primary" id="apply-filters">
+                                <i class="fas fa-search"></i>
+                                Apply Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customers Table -->
+                <div class="table-container">
+                <table class="customers-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Description</th>
+                            <th>Employee</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Smith</td>
+                            <td>+1 (555) 123-4567</td>
+                            <td>Premium client, interested in luxury properties</td>
+                            <td>Sarah Johnson</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary edit-customer" data-id="1">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Emily Davis</td>
+                            <td>+1 (555) 987-6543</td>
+                            <td>First-time buyer, looking for family homes</td>
+                            <td>Mike Wilson</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary edit-customer" data-id="2">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Robert Brown</td>
+                            <td>+1 (555) 456-7890</td>
+                            <td>Investor, seeking rental properties</td>
+                            <td>Lisa Chen</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary edit-customer" data-id="3">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Maria Garcia</td>
+                            <td>+1 (555) 789-0123</td>
+                            <td>Relocating from another city</td>
+                            <td>David Kim</td>
+                            <td><span class="status-badge status-inactive">Inactive</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary edit-customer" data-id="4">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>James Wilson</td>
+                            <td>+1 (555) 321-0987</td>
+                            <td>Senior citizen, downsizing</td>
+                            <td>Sarah Johnson</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-secondary edit-customer" data-id="5">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="btn btn-secondary" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        Previous
+                    </button>
+                    <div class="pagination-info">
+                        Showing 1-5 of 5 customers
+                    </div>
+                    <button class="btn btn-secondary" disabled>
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Customer Modal -->
+    <div class="modal" id="add-customer-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Customer</h2>
+                <button class="modal-close" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-customer-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customer-name">Full Name *</label>
+                            <input type="text" id="customer-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-phone">Phone Number *</label>
+                            <input type="tel" id="customer-phone" name="phone" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-email">Email</label>
+                        <input type="email" id="customer-email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-description">Description</label>
+                        <textarea id="customer-description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customer-employee">Assigned Employee</label>
+                            <select id="customer-employee" name="employee">
+                                <option value="">Select Employee</option>
+                                <option value="sarah">Sarah Johnson</option>
+                                <option value="mike">Mike Wilson</option>
+                                <option value="lisa">Lisa Chen</option>
+                                <option value="david">David Kim</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-status">Status</label>
+                            <select id="customer-status" name="status">
+                                <option value="active">Active</option>
+                                <option value="pending">Pending</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-add">Cancel</button>
+                <button class="btn btn-primary" id="save-customer">Save Customer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="../js/component-loader.js"></script>
+    <script src="../js/language-manager.js"></script>
+    <script src="../js/translation-utils.js"></script>
+    <script>
+        // Initialize date picker
+        flatpickr("#date-range", {
+            mode: "range",
+            dateFormat: "Y-m-d",
+            placeholder: "Select date range"
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('add-customer-modal');
+        const addBtn = document.getElementById('add-customer-btn');
+        const closeBtn = document.getElementById('close-modal');
+        const cancelBtn = document.getElementById('cancel-add');
+        const saveBtn = document.getElementById('save-customer');
+
+        addBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Save customer functionality
+        saveBtn.addEventListener('click', () => {
+            const form = document.getElementById('add-customer-form');
+            const formData = new FormData(form);
+            
+            // Here you would typically send the data to your backend
+            console.log('New customer data:', Object.fromEntries(formData));
+            
+            // Close modal and show success message
+            modal.style.display = 'none';
+            alert('Customer added successfully!');
+            form.reset();
+        });
+
+        // Filter functionality
+        document.getElementById('apply-filters').addEventListener('click', () => {
+            const dateRange = document.getElementById('date-range').value;
+            const phone = document.getElementById('phone-filter').value;
+            const status = document.getElementById('status-filter').value;
+            
+            console.log('Filters applied:', { dateRange, phone, status });
+            // Here you would typically filter the table data
+        });
+
+        document.getElementById('clear-filters').addEventListener('click', () => {
+            document.getElementById('date-range').value = '';
+            document.getElementById('phone-filter').value = '';
+            document.getElementById('status-filter').value = '';
+            // Here you would typically reset the table data
+        });
+
+        // Edit customer functionality
+        document.querySelectorAll('.edit-customer').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const customerId = e.target.closest('.edit-customer').dataset.id;
+                console.log('Edit customer:', customerId);
+                // Here you would typically open an edit modal or navigate to edit page
+            });
+        });
+
+        // Initialize customers page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Customers page DOM loaded');
+            
+            try {
+                // Load sidebar component with full functionality
+                await window.componentLoader.loadSidebarWithFunctionality('.sidebar-container');
+                
+                // Initialize language manager
+                const languageManager = new LanguageManager();
+                
+                // Wait for language manager to be ready
+                while (!languageManager.initialized) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                // Set up page header language selector
+                setupPageHeaderLanguageSelector();
+                
+                console.log('Customers page initialized successfully');
+                
+            } catch (error) {
+                console.error('Failed to initialize customers page:', error);
+            }
+        });
+
+        // Set up page header language selector
+        function setupPageHeaderLanguageSelector() {
+            const languageSelector = document.querySelector('.page-header .language-selector');
+            if (languageSelector) {
+                const currentLang = document.documentElement.lang || 'en';
+                languageSelector.value = currentLang;
+                
+                languageSelector.addEventListener('change', (e) => {
+                    const newLang = e.target.value;
+                    if (window.languageManager) {
+                        window.languageManager.setLanguage(newLang);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

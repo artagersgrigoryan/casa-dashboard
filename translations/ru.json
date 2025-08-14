@@ -1,0 +1,154 @@
+{
+  "nav": {
+    "title": "Управление недвижимостью",
+    "dashboard": "Панель управления",
+    "customers": "Клиенты",
+    "properties": "Недвижимость",
+    "employees": "Сотрудники",
+    "finances": "Финансы",
+    "settings": "Настройки"
+  },
+  "dashboard": {
+    "title": "Панель управления",
+    "subtitle": "Добро пожаловать! Вот что происходит с вашей недвижимостью:",
+    "theme": "Тема"
+  },
+  "stats": {
+    "totalProperty": "Всего объектов",
+    "occupiedApartments": "Занятые квартиры",
+    "monthlyIncome": "Месячный доход",
+    "maintenanceRequests": "Заявки на обслуживание"
+  },
+  "content": {
+    "recentProperties": "Последние объекты",
+    "recentActivity": "Последняя активность",
+    "propertyStatus": {
+      "occupied": "Занят",
+      "available": "Доступен",
+      "maintenance": "Обслуживание"
+    }
+  },
+  "activity": {
+    "newTenant": "Новый арендатор въехал в квартиру A1",
+    "maintenanceRequest": "Заявка на обслуживание квартиры C2",
+    "rentPayment": "Получена арендная плата за квартиру B3",
+    "inspectionCompleted": "Осмотр недвижимости завершен",
+    "listingPublished": "Опубликовано новое объявление о недвижимости"
+  },
+  "time": {
+    "hoursAgo": "часов назад",
+    "daysAgo": "дней назад"
+  },
+  "properties": {
+    "luxuryPenthouse": "Роскошный пентхаус A1",
+    "modernStudio": "Современная студия B3",
+    "executiveSuite": "Исполнительный люкс C2",
+    "premiumLoft": "Премиум лофт D1",
+    "deluxeApartment": "Делюкс квартира E4"
+  },
+  "addApartment": {
+    "title": "Добавить новую квартиру",
+    "basicInfo": "Основная информация",
+    "propertyName": "Название недвижимости",
+    "propertyType": "Тип недвижимости",
+    "selectType": "Выберите тип",
+    "apartment": "Квартира",
+    "studio": "Студия",
+    "penthouse": "Пентхаус",
+    "loft": "Лофт",
+    "duplex": "Дуплекс",
+    "address": "Адрес",
+    "city": "Город",
+    "state": "Область/Провинция",
+    "zipCode": "Почтовый индекс",
+    "country": "Страна",
+    "floor": "Этаж",
+    "propertyDetails": "Детали недвижимости",
+    "bedrooms": "Спальни",
+    "bathrooms": "Ванные комнаты",
+    "squareFootage": "Площадь в квадратных футах",
+    "parkingSpaces": "Парковочные места",
+    "yearBuilt": "Год постройки",
+    "condition": "Состояние",
+    "selectCondition": "Выберите состояние",
+    "excellent": "Отличное",
+    "good": "Хорошее",
+    "fair": "Удовлетворительное",
+    "needsRepair": "Требует ремонта",
+    "financialInfo": "Финансовая информация",
+    "monthlyRent": "Месячная арендная плата",
+    "securityDeposit": "Депозит",
+    "utilitiesIncluded": "Включенные коммунальные услуги",
+    "selectOption": "Выберите опцию",
+    "none": "Ничего",
+    "water": "Вода",
+    "electricity": "Электричество",
+    "gas": "Газ",
+    "internet": "Интернет",
+    "allUtilities": "Все коммунальные услуги",
+    "petPolicy": "Политика по домашним животным",
+    "selectPolicy": "Выберите политику",
+    "noPets": "Без домашних животных",
+    "catsOnly": "Только кошки",
+    "dogsOnly": "Только собаки",
+    "petsAllowed": "Домашние животные разрешены",
+    "amenities": "Удобства",
+    "airConditioning": "Кондиционер",
+    "heating": "Отопление",
+    "balcony": "Балкон",
+    "elevator": "Лифт",
+    "gym": "Спортзал",
+    "pool": "Бассейн",
+    "parking": "Парковка",
+    "laundry": "Прачечная",
+    "description": "Описание",
+    "propertyDescription": "Описание недвижимости",
+    "descriptionPlaceholder": "Опишите недвижимость, её особенности и особые примечания...",
+    "photos": "Фотографии",
+    "uploadPhotos": "Загрузить фотографии",
+    "photosHelp": "Вы можете выбрать несколько фотографий. Поддерживаемые форматы: JPG, PNG, GIF",
+    "addApartment": "Добавить квартиру",
+    "cancel": "Отмена"
+  },
+  "user": {
+    "name": "Администратор",
+    "role": "Администратор"
+  },
+  "settings": {
+    "title": "Настройки",
+    "subtitle": "Управляйте настройками и предпочтениями панели управления",
+    "language": {
+      "title": "Язык",
+      "description": "Выберите предпочитаемый язык для интерфейса панели управления"
+    },
+    "theme": {
+      "title": "Тема",
+      "description": "Выберите предпочитаемую визуальную тему для панели управления",
+      "light": "Светлая Тема",
+      "lightDesc": "Чистый и яркий интерфейс",
+      "dark": "Темная Тема",
+      "darkDesc": "Современный темный интерфейс"
+    }
+  },
+  "common": {
+    "required": "Обязательно",
+    "loading": "Загрузка...",
+    "save": "Сохранить",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "view": "Просмотр",
+    "close": "Закрыть",
+    "submit": "Отправить",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущий",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "sort": "Сортировка",
+    "refresh": "Обновить",
+    "export": "Экспорт",
+    "import": "Импорт",
+    "download": "Скачать",
+    "upload": "Загрузить"
+  }
+}

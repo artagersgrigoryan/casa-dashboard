@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Property Management Dashboard</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Container -->
+        <div class="sidebar-container"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mobile Sidebar Toggle -->
+            <button class="mobile-sidebar-toggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-center">
+                    <h1 class="page-title">Settings</h1>
+                </div>
+                <div class="header-right">
+                    <!-- Language Selector -->
+                    <select id="languageSelector" class="language-selector">
+                        <option value="en">English</option>
+                        <option value="hy">Հայերեն</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content-wrapper">
+                <!-- Settings Navigation Tabs -->
+                <div class="settings-tabs">
+                    <button class="settings-tab active" data-tab="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </button>
+                    <button class="settings-tab" data-tab="account">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Account</span>
+                    </button>
+                    <button class="settings-tab" data-tab="preferences">
+                        <i class="fas fa-cog"></i>
+                        <span>Preferences</span>
+                    </button>
+                    <button class="settings-tab" data-tab="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </button>
+                </div>
+
+                <!-- Profile Tab -->
+                <div class="settings-content active" id="profile-tab">
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <h2>Profile Information</h2>
+                            <p>Manage your personal information and profile settings</p>
+                        </div>
+                        
+                        <div class="profile-overview">
+                            <div class="profile-avatar-section">
+                                <div class="profile-avatar">
+                                    <img src="https://via.placeholder.com/120x120/3b82f6/ffffff?text=JD" alt="John Doe" id="profile-avatar-img">
+                                    <div class="avatar-overlay">
+                                        <button class="avatar-upload-btn" onclick="document.getElementById('avatar-input').click()">
+                                            <i class="fas fa-camera"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                                <div class="profile-info">
+                                    <h3 id="profile-name">John Doe</h3>
+                                    <p id="profile-role">Senior Property Manager</p>
+                                    <p id="profile-email">john.doe@company.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="profile-form" id="profileForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="first-name">First Name</label>
+                                    <input type="text" id="first-name" name="firstName" value="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last-name">Last Name</label>
+                                    <input type="text" id="last-name" name="lastName" value="Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" value="john.doe@company.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" value="+1 (555) 123-4567">
+                                </div>
+                                <div class="form-group">
+                                    <label for="position">Job Position</label>
+                                    <input type="text" id="position" name="position" value="Senior Property Manager">
+                                </div>
+                                <div class="form-group">
+                                    <label for="department">Department</label>
+                                    <select id="department" name="department">
+                                        <option value="property-management">Property Management</option>
+                                        <option value="sales">Sales</option>
+                                        <option value="marketing">Marketing</option>
+                                        <option value="finance">Finance</option>
+                                        <option value="hr">Human Resources</option>
+                                    </select>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="bio">Bio</label>
+                                    <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself...">Experienced property manager with over 8 years in the real estate industry. Specialized in luxury properties and client relationship management.</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="resetProfileForm()">
+                                    <i class="fas fa-undo"></i> Reset
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Account Tab -->
+                <div class="settings-content" id="account-tab">
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <h2>Account Security</h2>
+                            <p>Manage your account security and authentication settings</p>
+                        </div>
+                        
+                        <div class="security-settings">
+                            <div class="security-item">
+                                <div class="security-info">
+                                    <h4>Password</h4>
+                                    <p>Last changed 30 days ago</p>
+                                </div>
+                                <button class="btn btn-secondary" onclick="showChangePasswordModal()">
+                                    <i class="fas fa-key"></i> Change Password
+                                </button>
+                            </div>
+                            
+                            <div class="security-item">
+                                <div class="security-info">
+                                    <h4>Two-Factor Authentication</h4>
+                                    <p>Add an extra layer of security to your account</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="twoFactorToggle">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="security-item">
+                                <div class="security-info">
+                                    <h4>Login Sessions</h4>
+                                    <p>Manage active login sessions across devices</p>
+                                </div>
+                                <button class="btn btn-secondary" onclick="showSessionsModal()">
+                                    <i class="fas fa-desktop"></i> View Sessions
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferences Tab -->
+                <div class="settings-content" id="preferences-tab">
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <h2>Interface Preferences</h2>
+                            <p>Customize your dashboard experience</p>
+                        </div>
+                        
+                        <div class="preferences-grid">
+                            <!-- Language Settings -->
+                            <div class="preference-card">
+                                <div class="preference-header">
+                                    <div class="preference-icon">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Language</h4>
+                                        <p>Choose your preferred language</p>
+                                    </div>
+                                </div>
+                                <div class="language-options">
+                                    <div class="language-option" data-lang="en">
+                                        <img src="https://via.placeholder.com/32x24/1f2937/ffffff?text=EN" alt="English" class="language-flag">
+                                        <div class="language-info">
+                                            <div class="language-name">English</div>
+                                            <div class="language-native">English</div>
+                                        </div>
+                                        <div class="language-check">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="language-option" data-lang="hy">
+                                        <img src="https://via.placeholder.com/32x24/1f2937/ffffff?text=HY" alt="Armenian" class="language-flag">
+                                        <div class="language-info">
+                                            <div class="language-name">Armenian</div>
+                                            <div class="language-native">Հայերեն</div>
+                                        </div>
+                                        <div class="language-check">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="language-option" data-lang="ru">
+                                        <img src="https://via.placeholder.com/32x24/1f2937/ffffff?text=RU" alt="Russian" class="language-flag">
+                                        <div class="language-info">
+                                            <div class="language-name">Russian</div>
+                                            <div class="language-native">Русский</div>
+                                        </div>
+                                        <div class="language-check">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Theme Settings -->
+                            <div class="preference-card">
+                                <div class="preference-header">
+                                    <div class="preference-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Theme</h4>
+                                        <p>Choose your preferred visual theme</p>
+                                    </div>
+                                </div>
+                                <div class="theme-toggle-container">
+                                    <div class="theme-toggle-wrapper">
+                                        <div class="theme-toggle-label">
+                                            <i class="fas fa-sun theme-icon-light"></i>
+                                            <span>Light</span>
+                                        </div>
+                                        <label class="theme-switch">
+                                            <input type="checkbox" id="themeToggle">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <div class="theme-toggle-label">
+                                            <i class="fas fa-moon theme-icon-dark"></i>
+                                            <span>Dark</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dashboard Layout -->
+                            <div class="preference-card">
+                                <div class="preference-header">
+                                    <div class="preference-icon">
+                                        <i class="fas fa-th-large"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Dashboard Layout</h4>
+                                        <p>Choose your preferred dashboard arrangement</p>
+                                    </div>
+                                </div>
+                                <div class="layout-options">
+                                    <label class="layout-option">
+                                        <input type="radio" name="layout" value="compact" checked>
+                                        <span class="layout-radio"></span>
+                                        <span>Compact</span>
+                                    </label>
+                                    <label class="layout-option">
+                                        <input type="radio" name="layout" value="comfortable">
+                                        <span class="layout-radio"></span>
+                                        <span>Comfortable</span>
+                                    </label>
+                                    <label class="layout-option">
+                                        <input type="radio" name="layout" value="spacious">
+                                        <span class="layout-radio"></span>
+                                        <span>Spacious</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Tab -->
+                <div class="settings-content" id="notifications-tab">
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <h2>Notification Preferences</h2>
+                            <p>Control how and when you receive notifications</p>
+                        </div>
+                        
+                        <div class="notification-settings">
+                            <div class="notification-category">
+                                <h4>Email Notifications</h4>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <span>Property Updates</span>
+                                        <p>Get notified about property status changes</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="emailPropertyUpdates" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <span>Financial Reports</span>
+                                        <p>Receive monthly financial summaries</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="emailFinancialReports" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <span>System Alerts</span>
+                                        <p>Important system maintenance notifications</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="emailSystemAlerts">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-category">
+                                <h4>Push Notifications</h4>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <span>Real-time Updates</span>
+                                        <p>Instant notifications for urgent matters</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="pushRealTime" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-info">
+                                        <span>Reminders</span>
+                                        <p>Task and appointment reminders</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="pushReminders">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="changePasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Change Password</h2>
+                <button class="modal-close" id="closePasswordModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label for="current-password">Current Password</label>
+                        <input type="password" id="current-password" name="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" name="newPassword" required>
+                        <div class="password-strength" id="passwordStrength"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm New Password</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelPasswordBtn">Cancel</button>
+                <button type="submit" form="changePasswordForm" class="btn btn-primary">Change Password</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Sessions Modal -->
+    <div id="sessionsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Active Sessions</h2>
+                <button class="modal-close" id="closeSessionsModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="sessions-list">
+                    <div class="session-item current">
+                        <div class="session-info">
+                            <div class="session-device">
+                                <i class="fas fa-desktop"></i>
+                                <span>Current Session - Windows Desktop</span>
+                            </div>
+                            <div class="session-details">
+                                <span>Chrome Browser • Last active: Now</span>
+                                <span>IP: 192.168.1.100 • Location: New York, US</span>
+                            </div>
+                        </div>
+                        <span class="session-status current">Current</span>
+                    </div>
+                    <div class="session-item">
+                        <div class="session-info">
+                            <div class="session-device">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>iPhone 12</span>
+                            </div>
+                            <div class="session-details">
+                                <span>Safari Browser • Last active: 2 hours ago</span>
+                                <span>IP: 192.168.1.101 • Location: New York, US</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-danger" onclick="terminateSession(2)">Terminate</button>
+                    </div>
+                    <div class="session-item">
+                        <div class="session-info">
+                            <div class="session-device">
+                                <i class="fas fa-laptop"></i>
+                                <span>MacBook Pro</span>
+                            </div>
+                            <div class="session-details">
+                                <span>Safari Browser • Last active: 1 day ago</span>
+                                <span>IP: 192.168.1.102 • Location: New York, US</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-danger" onclick="terminateSession(3)">Terminate</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeSessionsBtn">Close</button>
+                <button type="button" class="btn btn-danger" onclick="terminateAllOtherSessions()">Terminate All Other Sessions</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/component-loader.js"></script>
+    <script src="../js/language-manager.js"></script>
+    <script src="../js/translation-utils.js"></script>
+    <script>
+        // Sample user data
+        const userProfile = {
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john.doe@company.com',
+            phone: '+1 (555) 123-4567',
+            position: 'Senior Property Manager',
+            department: 'property-management',
+            bio: 'Experienced property manager with over 8 years in the real estate industry. Specialized in luxury properties and client relationship management.',
+            avatar: 'https://via.placeholder.com/120x120/3b82f6/ffffff?text=JD'
+        };
+
+        // Initialize settings page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Settings page DOM loaded');
+            
+            try {
+                // Load sidebar component with full functionality
+                await window.componentLoader.loadSidebarWithFunctionality('.sidebar-container');
+                
+                // Initialize language manager
+                const languageManager = new LanguageManager();
+                
+                // Wait for language manager to be ready
+                while (!languageManager.initialized) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                // Initialize settings functionality
+                initializeSettings();
+                
+                // Set up page header language selector
+                setupPageHeaderLanguageSelector();
+                
+                console.log('Settings page initialized successfully');
+                
+            } catch (error) {
+                console.error('Failed to initialize settings page:', error);
+            }
+        });
+        
+        // Initialize all settings functionality
+        function initializeSettings() {
+            initializeTabs();
+            initializeProfileForm();
+            initializeSecuritySettings();
+            initializePreferences();
+            initializeNotificationSettings();
+            initializeModals();
+            loadUserProfile();
+        }
+
+        // Initialize tabs
+        function initializeTabs() {
+            const tabBtns = document.querySelectorAll('.settings-tab');
+            const tabContents = document.querySelectorAll('.settings-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.dataset.tab;
+                    
+                    // Remove active class from all tabs
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    btn.classList.add('active');
+                    document.getElementById(`${targetTab}-tab`).classList.add('active');
+                });
+            });
+        }
+
+        // Initialize profile form
+        function initializeProfileForm() {
+            const profileForm = document.getElementById('profileForm');
+            
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveProfileChanges();
+            });
+        }
+
+        // Load user profile data
+        function loadUserProfile() {
+            // Set form values
+            document.getElementById('first-name').value = userProfile.firstName;
+            document.getElementById('last-name').value = userProfile.lastName;
+            document.getElementById('email').value = userProfile.email;
+            document.getElementById('phone').value = userProfile.phone;
+            document.getElementById('position').value = userProfile.position;
+            document.getElementById('department').value = userProfile.department;
+            document.getElementById('bio').value = userProfile.bio;
+            
+            // Update profile display
+            updateProfileDisplay();
+        }
+
+        // Update profile display
+        function updateProfileDisplay() {
+            const fullName = `${userProfile.firstName} ${userProfile.lastName}`;
+            document.getElementById('profile-name').textContent = fullName;
+            document.getElementById('profile-role').textContent = userProfile.position;
+            document.getElementById('profile-email').textContent = userProfile.email;
+        }
+
+        // Save profile changes
+        function saveProfileChanges() {
+            const formData = new FormData(document.getElementById('profileForm'));
+            const profileData = Object.fromEntries(formData.entries());
+            
+            // Update user profile object
+            Object.assign(userProfile, profileData);
+            
+            // Update display
+            updateProfileDisplay();
+            
+            // Show success message
+            showNotification('Profile updated successfully!', 'success');
+            
+            // Here you would typically send the data to your backend
+            console.log('Profile updated:', profileData);
+        }
+
+        // Reset profile form
+        function resetProfileForm() {
+            loadUserProfile();
+            showNotification('Profile form reset to original values', 'info');
+        }
+
+        // Initialize security settings
+        function initializeSecuritySettings() {
+            // Two-factor authentication toggle
+            const twoFactorToggle = document.getElementById('twoFactorToggle');
+            twoFactorToggle.addEventListener('change', function() {
+                const enabled = this.checked;
+                showNotification(
+                    `Two-factor authentication ${enabled ? 'enabled' : 'disabled'}`,
+                    enabled ? 'success' : 'info'
+                );
+            });
+        }
+
+        // Initialize preferences
+        function initializePreferences() {
+            // Language options
+            setupLanguageOptions();
+            
+            // Theme toggle
+            setupThemeToggle();
+            
+            // Layout options
+            setupLayoutOptions();
+        }
+
+        // Set up language options
+        function setupLanguageOptions() {
+            const languageOptions = document.querySelectorAll('.language-option');
+            const currentLang = document.documentElement.lang || 'en';
+            
+            languageOptions.forEach(option => {
+                const lang = option.dataset.lang;
+                const check = option.querySelector('.language-check');
+                
+                // Set initial active state
+                if (lang === currentLang) {
+                    option.classList.add('active');
+                    check.style.opacity = '1';
+                } else {
+                    option.classList.remove('active');
+                    check.style.opacity = '0';
+                }
+                
+                // Add click handler
+                option.addEventListener('click', () => {
+                    // Remove active class from all options
+                    languageOptions.forEach(opt => {
+                        opt.classList.remove('active');
+                        opt.querySelector('.language-check').style.opacity = '0';
+                    });
+                    
+                    // Add active class to clicked option
+                    option.classList.add('active');
+                    check.style.opacity = '1';
+                    
+                    // Change language
+                    if (window.languageManager) {
+                        window.languageManager.setLanguage(lang);
+                    }
+                    
+                    showNotification(`Language changed to ${lang.toUpperCase()}`, 'success');
+                });
+            });
+        }
+
+        // Set up theme toggle
+        function setupThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            
+            // Set initial state
+            if (currentTheme === 'dark') {
+                themeToggle.checked = true;
+            } else {
+                themeToggle.checked = false;
+            }
+            
+            // Add change handler
+            themeToggle.addEventListener('change', () => {
+                const newTheme = themeToggle.checked ? 'dark' : 'light';
+                const html = document.documentElement;
+                
+                // Apply theme
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                showNotification(`Theme changed to ${newTheme}`, 'success');
+                console.log('Theme changed to:', newTheme);
+            });
+        }
+
+        // Set up layout options
+        function setupLayoutOptions() {
+            const layoutOptions = document.querySelectorAll('input[name="layout"]');
+            const currentLayout = localStorage.getItem('layout') || 'compact';
+            
+            // Set initial state
+            layoutOptions.forEach(option => {
+                if (option.value === currentLayout) {
+                    option.checked = true;
+                }
+            });
+            
+            // Add change handlers
+            layoutOptions.forEach(option => {
+                option.addEventListener('change', function() {
+                    const newLayout = this.value;
+                    localStorage.setItem('layout', newLayout);
+                    showNotification(`Layout changed to ${newLayout}`, 'success');
+                });
+            });
+        }
+
+        // Initialize notification settings
+        function initializeNotificationSettings() {
+            const notificationToggles = document.querySelectorAll('.notification-settings input[type="checkbox"]');
+            
+            notificationToggles.forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    const setting = this.id;
+                    const enabled = this.checked;
+                    
+                    // Save setting to localStorage
+                    localStorage.setItem(`notification_${setting}`, enabled);
+                    
+                    showNotification(
+                        `${setting.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} ${enabled ? 'enabled' : 'disabled'}`,
+                        'success'
+                    );
+                });
+                
+                // Load saved settings
+                const savedSetting = localStorage.getItem(`notification_${toggle.id}`);
+                if (savedSetting !== null) {
+                    toggle.checked = savedSetting === 'true';
+                }
+            });
+        }
+
+        // Initialize modals
+        function initializeModals() {
+            // Change password modal
+            const passwordModal = document.getElementById('changePasswordModal');
+            const changePasswordForm = document.getElementById('changePasswordForm');
+            
+            // Close password modal
+            document.getElementById('closePasswordModal').addEventListener('click', () => {
+                passwordModal.style.display = 'none';
+            });
+            
+            document.getElementById('cancelPasswordBtn').addEventListener('click', () => {
+                passwordModal.style.display = 'none';
+            });
+            
+            // Sessions modal
+            const sessionsModal = document.getElementById('sessionsModal');
+            
+            document.getElementById('closeSessionsModal').addEventListener('click', () => {
+                sessionsModal.style.display = 'none';
+            });
+            
+            document.getElementById('closeSessionsBtn').addEventListener('click', () => {
+                sessionsModal.style.display = 'none';
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === passwordModal) {
+                    passwordModal.style.display = 'none';
+                }
+                if (event.target === sessionsModal) {
+                    sessionsModal.style.display = 'none';
+                }
+            });
+            
+            // Form submissions
+            changePasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                changePassword();
+            });
+        }
+
+        // Show change password modal
+        function showChangePasswordModal() {
+            document.getElementById('changePasswordModal').style.display = 'block';
+            document.getElementById('changePasswordForm').reset();
+        }
+
+        // Show sessions modal
+        function showSessionsModal() {
+            document.getElementById('sessionsModal').style.display = 'block';
+        }
+
+        // Change password
+        function changePassword() {
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (newPassword !== confirmPassword) {
+                showNotification('New passwords do not match', 'error');
+                return;
+            }
+            
+            if (newPassword.length < 8) {
+                showNotification('Password must be at least 8 characters long', 'error');
+                return;
+            }
+            
+            // Here you would typically send the data to your backend
+            console.log('Password change requested:', { currentPassword, newPassword });
+            
+            showNotification('Password changed successfully!', 'success');
+            document.getElementById('changePasswordModal').style.display = 'none';
+        }
+
+        // Terminate session
+        function terminateSession(sessionId) {
+            if (confirm('Are you sure you want to terminate this session?')) {
+                showNotification(`Session ${sessionId} terminated`, 'success');
+                // Here you would typically send the request to your backend
+            }
+        }
+
+        // Terminate all other sessions
+        function terminateAllOtherSessions() {
+            if (confirm('Are you sure you want to terminate all other sessions? This will log you out from all other devices.')) {
+                showNotification('All other sessions terminated', 'success');
+                // Here you would typically send the request to your backend
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close">&times;</button>
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => notification.classList.add('show'), 100);
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+            
+            // Close button
+            notification.querySelector('.notification-close').addEventListener('click', () => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            });
+        }
+
+        // Set up page header language selector
+        function setupPageHeaderLanguageSelector() {
+            const languageSelector = document.querySelector('.page-header .language-selector');
+            if (languageSelector) {
+                const currentLang = document.documentElement.lang || 'en';
+                languageSelector.value = currentLang;
+                
+                languageSelector.addEventListener('change', (e) => {
+                    const newLang = e.target.value;
+                    if (window.languageManager) {
+                        window.languageManager.setLanguage(newLang);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

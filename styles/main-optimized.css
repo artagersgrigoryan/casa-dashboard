@@ -1,0 +1,6 @@
+/* ========================================
+   MAIN OPTIMIZED CSS - Single Import Point
+   ======================================== */
+
+/* Import the consolidated dashboard styles */
+@import url('./dashboard-optimized.css');

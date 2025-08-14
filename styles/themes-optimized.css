@@ -1,0 +1,227 @@
+/* ========================================
+   OPTIMIZED THEMES CSS - Using Design Tokens
+   ======================================== */
+
+/* Light Theme (Default) */
+:root {
+  /* Semantic Color Mapping */
+  --bg-primary: var(--light-color);
+  --bg-secondary: white;
+  --bg-sidebar: white;
+  --bg-card: white;
+  --bg-overlay: rgba(0, 0, 0, 0.1);
+  
+  --text-primary: var(--dark-color);
+  --text-secondary: var(--gray-color);
+  --text-muted: var(--gray-color);
+  --text-inverse: white;
+  
+  --border-primary: var(--gray-light);
+  --border-secondary: var(--gray-light);
+  --border-accent: var(--primary-light);
+  
+  --shadow-primary: var(--box-shadow);
+  --shadow-secondary: var(--box-shadow-hover);
+  --shadow-elevated: var(--shadow-lg);
+}
+
+/* Dark Theme - Improved Accessibility */
+[data-theme="dark"] {
+  /* Semantic Color Mapping with Better Contrast */
+  --bg-primary: #0f0f23;
+  --bg-secondary: #1a1a2e;
+  --bg-sidebar: #1a1a2e;
+  --bg-card: #1a1a2e;
+  --bg-overlay: rgba(255, 255, 255, 0.05);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f0f23;
+  
+  --border-primary: #334155;
+  --border-secondary: #475569;
+  --border-accent: rgba(67, 97, 238, 0.3);
+  
+  --shadow-primary: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+  --shadow-secondary: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  
+  /* Enhanced Dark Theme Colors for Better Accessibility */
+  --primary-color: #60a5fa;
+  --primary-light: rgba(96, 165, 250, 0.15);
+  --secondary-color: #818cf8;
+  --accent-color: #22d3ee;
+  
+  --success-color: #4ade80;
+  --warning-color: #fbbf24;
+  --danger-color: #f87171;
+  
+  --gray-color: #cbd5e1;
+  --gray-light: #475569;
+}
+
+/* Global Theme Transitions */
+* {
+  transition: background-color var(--transition), 
+              color var(--transition), 
+              border-color var(--transition), 
+              box-shadow var(--transition);
+}
+
+/* Dashboard-specific Background Effects */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Sidebar Theme Adjustments */
+.sidebar {
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-primary);
+}
+
+/* Main Content Theme Adjustments */
+.main-content {
+  background: var(--bg-primary);
+}
+
+/* Dashboard Header Theme Adjustments */
+.dashboard-header {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+}
+
+/* Card Theme Adjustments */
+.stat-card,
+.content-card,
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+}
+
+/* Navigation Theme Adjustments */
+.nav-link {
+  color: var(--text-secondary);
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+}
+
+.nav-link.active {
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+  border-right: 3px solid var(--primary-color);
+}
+
+/* Status Colors (Theme Independent but Enhanced for Dark Mode) */
+.status-available {
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--success-color);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.status-occupied {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--danger-color);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.status-maintenance {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--warning-color);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+/* Dark Mode Specific Enhancements */
+[data-theme="dark"] .status-available {
+  background: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+}
+
+[data-theme="dark"] .status-occupied {
+  background: rgba(248, 113, 113, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.4);
+}
+
+[data-theme="dark"] .status-maintenance {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+/* Enhanced Dark Mode Card Borders */
+[data-theme="dark"] .stat-card::before,
+[data-theme="dark"] .content-card::before {
+  background: linear-gradient(90deg, #60a5fa, #22d3ee);
+}
+
+/* Dark Mode Sidebar Enhancements */
+[data-theme="dark"] .sidebar-header {
+  border-bottom-color: #334155;
+}
+
+[data-theme="dark"] .nav-link:hover {
+  background-color: rgba(96, 165, 250, 0.15);
+}
+
+[data-theme="dark"] .nav-link.active {
+  background-color: rgba(96, 165, 250, 0.2);
+  border-right-color: #60a5fa;
+}
+
+/* Responsive Theme Adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    background: var(--bg-sidebar);
+  }
+}
+
+/* Accessibility Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  :root {
+    --border-primary: #000;
+    --border-secondary: #000;
+    --text-secondary: #000;
+    --text-muted: #000;
+  }
+  
+  [data-theme="dark"] {
+    --border-primary: #fff;
+    --border-secondary: #fff;
+    --text-secondary: #fff;
+    --text-muted: #fff;
+    --bg-card: #000;
+    --bg-sidebar: #000;
+    --bg-primary: #000;
+  }
+}
+
+/* Print Styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  .sidebar {
+    display: none;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+}
