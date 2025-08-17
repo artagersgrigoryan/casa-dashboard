@@ -30,6 +30,7 @@
      LAYOUT CONSTANTS
      ======================================== */
   --sidebar-width: 260px;
+  --sidebar-collapsed-width: 60px;
   --header-height: 80px;
   --border-radius: 8px;
   

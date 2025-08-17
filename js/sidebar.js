@@ -34,6 +34,7 @@ class SidebarManager {
     init() {
         console.log('Initializing sidebar...');
         this.loadSidebar();
+        this.restoreSidebarState();
     }
 
     // Load sidebar content
@@ -57,7 +58,9 @@ class SidebarManager {
                 sidebarContainer.innerHTML = html;
                 this.sidebarLoaded = true;
                 this.setActivePage();
+                console.log('About to bind events...');
                 this.bindEvents();
+                this.restoreSidebarState();
                 console.log('Sidebar component loaded successfully');
             } else {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -75,12 +78,13 @@ class SidebarManager {
         const sidebarContainer = document.querySelector('.sidebar-container');
         
         if (sidebarContainer) {
+            console.log('Sidebar container found for fallback');
             const fallbackHTML = `
                 <aside class="sidebar">
                     <div class="sidebar-header">
                         <h1>
                             <i class="fas fa-building"></i>
-                            <span data-translate="nav.title">Property Management</span>
+                            <span class="sidebar-title" data-translate="nav.title">Property Management</span>
                         </h1>
                     </div>
                     
@@ -88,44 +92,44 @@ class SidebarManager {
                         <ul class="nav-menu">
                             <li class="nav-item">
                                 <a href="home.html" class="nav-link" data-page="home">
-                                    <i class="fas fa-home"></i>
-                                    <span data-translate="nav.dashboard">1. Dashboard</span>
+                                    <i class="fas fa-th-large"></i>
+                                    <span class="nav-text" data-translate="nav.dashboard">Dashboard</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="customers.html" class="nav-link" data-page="customers">
                                     <i class="fas fa-users"></i>
-                                    <span data-translate="nav.customers">2. Customers</span>
+                                    <span class="nav-text" data-translate="nav.customers">Customers</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="properties.html" class="nav-link" data-page="properties">
                                     <i class="fas fa-building"></i>
-                                    <span data-translate="nav.properties">3. Properties</span>
+                                    <span class="nav-text" data-translate="nav.properties">Properties</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="employees.html" class="nav-link" data-page="employees">
-                                    <i class="fas fa-users"></i>
-                                    <span data-translate="nav.employees">4. Employees</span>
+                                    <i class="fas fa-user-tie"></i>
+                                    <span class="nav-text" data-translate="nav.employees">Employees</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="maintenance.html" class="nav-link" data-page="maintenance">
                                     <i class="fas fa-tools"></i>
-                                    <span data-translate="nav.maintenance">5. Maintenance</span>
+                                    <span class="nav-text" data-translate="nav.maintenance">Maintenance</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="finances.html" class="nav-link" data-page="finances">
                                     <i class="fas fa-chart-line"></i>
-                                    <span data-translate="nav.finances">6. Finances</span>
+                                    <span class="nav-text" data-translate="nav.finances">Finances</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="settings.html" class="nav-link" data-page="settings">
                                     <i class="fas fa-cog"></i>
-                                    <span data-translate="nav.settings">7. Settings</span>
+                                    <span class="nav-text" data-translate="nav.settings">Settings</span>
                                 </a>
                             </li>
                         </ul>
@@ -140,12 +144,18 @@ class SidebarManager {
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Collapse Button - positioned to overlay main content -->
+                    <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Toggle sidebar">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
                 </aside>
             `;
             
             sidebarContainer.innerHTML = fallbackHTML;
             this.sidebarLoaded = true;
             this.setActivePage();
+            console.log('About to bind events for fallback...');
             this.bindEvents();
             console.log('Sidebar fallback created successfully');
         } else {
@@ -200,6 +210,26 @@ class SidebarManager {
             }
         });
 
+        // Handle sidebar collapse toggle
+        const collapseBtn = document.getElementById('sidebarCollapseBtn');
+        console.log('Looking for collapse button:', collapseBtn);
+        if (collapseBtn) {
+            console.log('Collapse button found, adding click listener');
+            collapseBtn.addEventListener('click', () => {
+                console.log('Collapse button clicked!');
+                this.toggleSidebar();
+            });
+        } else {
+            console.error('Collapse button not found!');
+            // Debug: check if sidebar exists and what's in it
+            const sidebar = document.querySelector('.sidebar');
+            console.log('Sidebar element:', sidebar);
+            if (sidebar) {
+                console.log('Sidebar HTML:', sidebar.innerHTML);
+                console.log('Sidebar contains collapse button:', sidebar.querySelector('.sidebar-collapse-btn'));
+            }
+        }
+
         // Handle mobile sidebar toggle
         const mobileToggle = document.querySelector('.mobile-sidebar-toggle');
         if (mobileToggle) {
@@ -223,6 +253,33 @@ class SidebarManager {
         });
     }
 
+    // Toggle sidebar collapse state
+    toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        const isCollapsed = sidebar.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+            sidebar.classList.remove('collapsed');
+            localStorage.setItem('sidebarCollapsed', 'false');
+            console.log('Sidebar expanded');
+        } else {
+            sidebar.classList.add('collapsed');
+            localStorage.setItem('sidebarCollapsed', 'true');
+            console.log('Sidebar collapsed');
+        }
+    }
+
+    // Restore sidebar state from localStorage
+    restoreSidebarState() {
+        const sidebar = document.querySelector('.sidebar');
+        const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+        
+        if (isCollapsed) {
+            sidebar.classList.add('collapsed');
+            console.log('Sidebar state restored: collapsed');
+        }
+    }
+
     // Refresh sidebar (useful for dynamic updates)
     refresh() {
         console.log('Refreshing sidebar...');
@@ -236,7 +293,7 @@ class SidebarManager {
                 <div class="sidebar-header">
                     <h1>
                         <i class="fas fa-building"></i>
-                        <span data-translate="nav.title">Property Management</span>
+                        <span class="sidebar-title" data-translate="nav.title">Property Management</span>
                     </h1>
                 </div>
                 
@@ -244,44 +301,44 @@ class SidebarManager {
                     <ul class="nav-menu">
                         <li class="nav-item">
                             <a href="home.html" class="nav-link" data-page="home">
-                                <i class="fas fa-home"></i>
-                                <span data-translate="nav.dashboard">1. Dashboard</span>
+                                <i class="fas fa-th-large"></i>
+                                <span class="nav-text" data-translate="nav.dashboard">Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="customers.html" class="nav-link" data-page="customers">
                                 <i class="fas fa-users"></i>
-                                <span data-translate="nav.customers">2. Customers</span>
+                                <span class="nav-text" data-translate="nav.customers">Customers</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="properties.html" class="nav-link" data-page="properties">
                                 <i class="fas fa-building"></i>
-                                <span data-translate="nav.properties">3. Properties</span>
+                                <span class="nav-text" data-translate="nav.properties">Properties</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="employees.html" class="nav-link" data-page="employees">
-                                <i class="fas fa-users"></i>
-                                <span data-translate="nav.employees">4. Employees</span>
+                                <i class="fas fa-user-tie"></i>
+                                <span class="nav-text" data-translate="nav.employees">Employees</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="maintenance.html" class="nav-link" data-page="maintenance">
                                 <i class="fas fa-tools"></i>
-                                <span data-translate="nav.maintenance">5. Maintenance</span>
+                                <span class="nav-text" data-translate="nav.maintenance">Maintenance</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="finances.html" class="nav-link" data-page="finances">
                                 <i class="fas fa-chart-line"></i>
-                                <span data-translate="nav.finances">6. Finances</span>
+                                <span class="nav-text" data-translate="nav.finances">Finances</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="settings.html" class="nav-link" data-page="settings">
                                 <i class="fas fa-cog"></i>
-                                <span data-translate="nav.settings">7. Settings</span>
+                                <span class="nav-text" data-translate="nav.settings">Settings</span>
                             </a>
                         </li>
                     </ul>
@@ -296,6 +353,11 @@ class SidebarManager {
                         </div>
                     </div>
                 </div>
+                
+                <!-- Collapse Button - positioned to overlay main content -->
+                <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Toggle sidebar">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
             </aside>
         `;
     }
